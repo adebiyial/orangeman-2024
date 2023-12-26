@@ -1,0 +1,28 @@
+---
+interface Props
+  extends Pick<HTMLAnchorElement, "href">,
+    Partial<Pick<HTMLAnchorElement, "rel" | "target">> {}
+
+const { href, rel = "noopener", target = "_blank" } = Astro.props;
+---
+
+<a {...{ href, rel, target }}><slot /></a>&zwnj;
+<style>
+  a {
+    display: inline-block;
+    transition: var(--transition-xx);
+    transition-property:
+      text-decoration-color,
+      -webkit-text-decoration-color;
+    text-decoration: underline;
+    text-decoration-color: #6e8c56;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2.5px;
+
+    &:hover {
+      transition: var(--transition-fast);
+      -webkit-text-decoration-color: #a6ffbf;
+      text-decoration-color: #a6ffbf;
+    }
+  }
+</style>

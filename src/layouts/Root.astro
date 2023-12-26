@@ -17,7 +17,9 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <slot />
+    <div id="canvas">
+      <slot />
+    </div>
   </body>
 </html>
 <style is:global>
@@ -27,17 +29,38 @@ const { title } = Astro.props;
       sans-serif;
     --page-width: 67rem;
     --content-width: 40rem;
-    --font-display: "Bricolage Grotesque 72pt", var(--font-fallback);
-    --font-body: "Bricolage Grotesque 72pt", var(--font-fallback);
+    --font-display: "Bricolage Grotesque 24pt", var(--font-fallback);
+    --font-body: "Bricolage Grotesque 24pt", var(--font-fallback);
     --font-sans: var(--font-body);
     /* font-serif */
     --font-mono: Menlo, Monaco, Lucida Console, Liberation Mono,
       DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-    --gap-s: 0.25rem;
-    --leading: 1.75rem;
     --text: 1rem;
     --type: var(--text) / var(--leading) var(--font-body);
     --type-body: var(--type);
+
+    /* Spacing */
+    --page-top: 8rem;
+    --gap-s: 4px;
+    --gap: 8px;
+    --gap-2x: 16px;
+    --gap-3x: 24px;
+    --gap-4x: 32px;
+    --gap-6x: 48px;
+    --gap-8x: 64px;
+    --gap-12x: 72px;
+    --gap-16x: 128px;
+    --leading: 1.75rem;
+    --safe-area-inset-top: env(safe-area-inset-top, 0px);
+    --safe-area-inset-right: env(safe-area-inset-right, 0px);
+    --safe-area-inset-left: env(safe-area-inset-left, 0px);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+    --body-margin-left: max(1.5rem var(--safe-area-inset-left));
+    --body-margin-right: max(1.5rem var(--safe-area-inset-right));
+
+    /* Transitions */
+    --transition-xx: 240ms;
+    --transition-fast: 100ms;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -75,6 +98,12 @@ const { title } = Astro.props;
     margin: 0;
     overflow-x: hidden;
     overflow-y: scroll;
+  }
+  #canvas {
+    min-height: 100%;
+    padding-left: var(--body-margin-left);
+    padding-right: var(--body-margin-right);
+    padding-bottom: var(--safe-area-inset-bottom);
   }
   b,
   strong {
@@ -120,5 +149,35 @@ const { title } = Astro.props;
   }
   a {
     color: inherit;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin-block: 0;
+  }
+  /* Defaults */
+  [data-grid] {
+    display: grid;
+  }
+  [data-prose] {
+    [data-grid] {
+      row-gap: var(--gap-3x);
+    }
+
+    p {
+      line-height: var(--leading);
+      margin: 0;
+
+      &[data-subtitle] {
+        font-size: 14px;
+        font-weight: 500;
+        color: #a4a4a4;
+        line-height: 1.5;
+      }
+    }
+  }
+  [data-comment] {
+    color: #ff6d00;
   }
 </style>
