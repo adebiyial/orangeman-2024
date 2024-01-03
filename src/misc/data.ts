@@ -1,6 +1,7 @@
-import type { ISectionGrid } from "./types";
+import links from "./links";
+import type { TCard } from "./types";
 
-export const writing: ISectionGrid["gridItems"] = [
+export const writing: TCard = [
   {
     title: "Creative Writing",
     subtitle: `Fiction, creative non-fiction, personal essays, cultural commentary, etc. on The <em>Septum.</em>`,
@@ -17,7 +18,7 @@ export const writing: ISectionGrid["gridItems"] = [
   },
 ];
 
-export const preoccupations: ISectionGrid["gridItems"] = [
+export const preoccupations: TCard = [
   {
     title: "Literature",
     subtitle:
@@ -35,20 +36,28 @@ export const preoccupations: ISectionGrid["gridItems"] = [
   },
 ];
 
-export const projects: ISectionGrid["gridItems"] = [
+export const projects: TCard = [
   {
     title: "Nightingale",
-    subtitle: "VSCode theme for night owls.",
+    subtitle: "VSCode theme for nocturnal folks.",
     isExternal: true,
+    url: links.projects.nightingale,
+  },
+  {
+    title: "Markdoc",
+    subtitle: "VSCode theme inspired by Markdoc.",
+    isExternal: true,
+    url: links.projects.markdoc,
   },
   {
     title: "The Septum",
     subtitle: "Website for a media and publication company.",
     isExternal: true,
+    url: links.websites.septum,
   },
 ];
 
-export const playground: ISectionGrid["gridItems"] = [
+export const playground: TCard = [
   {
     title: "Nightingale",
     subtitle: "VSCode theme for night owls.",

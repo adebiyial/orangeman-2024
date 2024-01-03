@@ -1,0 +1,119 @@
+---
+import Arrow from "../components/Arrow.astro";
+import Hyperlink from "../components/Hyperlink.astro";
+import PageHeader from "../components/PageHeader.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import Root from "../layouts/Root.astro";
+import { groupBy } from "../misc/fns";
+import publications from "../misc/publications.json";
+
+const groupedPublications = groupBy(publications, "publisher");
+---
+
+<Root title="Publications">
+  <div data-grid="main" data-page="publications">
+    <nav>
+      <Hyperlink href="/">
+        <Arrow angle="left" />
+        <span>Home</span>
+      </Hyperlink>
+    </nav>
+    <PageHeader heading="Publications" />
+    <ul data-grid>
+      {
+        Object.entries(groupedPublications).map(([key, value]) => {
+          return (
+            <li>
+              <SectionHeader heading={key} />
+              <ol>
+                {value.map(({ title, href, publicationDate }) => {
+                  return (
+                    <li>
+                      <Hyperlink href={href} target="_blank">
+                        {title}
+                        <time datetime={publicationDate}>
+                          {publicationDate}
+                        </time>
+                      </Hyperlink>
+                    </li>
+                  );
+                })}
+              </ol>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</Root>
+
+<style>
+  [data-page="publications"] {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding-block: var(--page-top);
+
+    > nav {
+      position: sticky;
+      top: var(--page-top);
+      white-space: nowrap;
+      z-index: 1;
+      grid-column: 1;
+      font-size: 20px;
+
+      a {
+        text-decoration: none;
+        font-weight: medium;
+      }
+    }
+  }
+
+  [data-grid="main"] {
+    grid-template-columns: 12rem var(--content-width) 12rem;
+    column-gap: 24px;
+
+    > * {
+      grid-column: 2;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  span[role="img"] {
+    color: #6e8c56;
+    width: 16px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  [data-grid] {
+    > li {
+      margin-block-end: var(--gap-6x);
+    }
+
+    h3 {
+      margin-block-end: var(--gap-2x);
+      text-transform: uppercase;
+    }
+  }
+
+  ul,
+  ol {
+    list-style: none;
+    padding: 0;
+  }
+
+  ol {
+    li a {
+      display: flex;
+      justify-content: space-between;
+      text-decoration: none;
+      padding: 0.6rem 0;
+      border-block-end: 1px solid rgba(30, 55, 38, 0.5);
+    }
+  }
+</style>

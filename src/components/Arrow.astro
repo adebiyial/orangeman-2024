@@ -1,0 +1,33 @@
+---
+interface Props {
+  angle?: "right" | "left";
+}
+
+const { angle } = Astro.props;
+---
+
+{
+  angle === "left" ? (
+    <span role="img" aria-label={`arrow-${angle} icon`}>
+      ↶
+    </span>
+  ) : (
+    <span role="img" aria-label={`arrow-${angle} icon`}>
+      ↷
+    </span>
+  )
+}
+
+<style>
+  [aria-label*="icon"] {
+    display: inline-block;
+  }
+
+  [aria-label^="arrow-right"] {
+    transform: rotate(-90deg);
+  }
+
+  [aria-label^="arrow-left"] {
+    transform: rotate(90deg);
+  }
+</style>

@@ -1,0 +1,29 @@
+---
+import Hyperlink from "../components/Hyperlink.astro";
+import links from "../misc/links";
+
+const { websites, pubBylines } = links;
+---
+
+<section data-grid class="intro">
+  <p>
+    Passionate about building <em>simple</em> and <em>functional</em>
+    web interfaces and experiences.
+  </p>
+  <p>
+    In the past, I've worked at
+    <Hyperlink target="_blank" href={websites.hatchPath}>HatchPath</Hyperlink>,
+    <Hyperlink target="_blank" href={websites.ceviant}>Ceviant</Hyperlink>, and
+    <Hyperlink target="_blank" href={websites.edgio}>Edgio</Hyperlink>. And I'm
+    published on blogs like
+    <Hyperlink target="_blank" href={pubBylines.smashingmag}>
+      Smashing Magazine
+    </Hyperlink>,
+    <Hyperlink target="_blank" href={pubBylines["css-tricks"]}>
+      CSS-Tricks
+    </Hyperlink>, and
+    <Hyperlink target="_blank" href={pubBylines.logrocket}>
+      LogRocket
+    </Hyperlink>.
+  </p>
+</section>

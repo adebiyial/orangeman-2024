@@ -1,0 +1,152 @@
+[
+  {
+    "title": "Client-Side Routing In Next.js",
+    "publisher": "Smashing Magazine",
+    "href": "https://www.smashingmagazine.com/2021/06/client-side-routing-next-js",
+    "publicationDate": "June 18, 2021"
+  },
+  {
+    "title": "CommonMark: A Formal Specification For Markdown",
+    "publisher": "Smashing Magazine",
+    "href": "https://www.smashingmagazine.com/2020/12/commonmark-formal-specification-markdown",
+    "publicationDate": "December 3, 2020"
+  },
+  {
+    "title": "Getting Started With Next.js",
+    "publisher": "Smashing Magazine",
+    "href": "https://www.smashingmagazine.com/2020/10/getting-started-with-next-js",
+    "publicationDate": "October 22, 2020"
+  },
+  {
+    "title": "Comparing Styling Methods In Next.js",
+    "publisher": "Smashing Magazine",
+    "href": "https://www.smashingmagazine.com/2020/09/comparison-styling-methods-next-js",
+    "publicationDate": "September 17, 2020"
+  },
+  {
+    "title": "How To Use Styled-Components In React",
+    "publisher": "Smashing Magazine",
+    "href": "https://www.smashingmagazine.com/2020/07/styled-components-react",
+    "publicationDate": "July 23, 2020"
+  },
+  {
+    "title": "Using Formik to Handle Forms in React",
+    "publisher": "CSS-Trick",
+    "href": "https://css-tricks.com/using-formik-to-handle-forms-in-react",
+    "publicationDate": "April 28, 2020 "
+  },
+  {
+    "title": "Using GraphQL Playground with Gatsby",
+    "publisher": "CSS-Trick",
+    "href": "https://css-tricks.com/using-graphql-playground-with-gatsby",
+    "publicationDate": "July 18, 2019 "
+  },
+  {
+    "title": "Deploying a Client-Side Rendered create-react-app to Microsoft Azure",
+    "publisher": "CSS-Trick",
+    "href": "https://css-tricks.com/deploying-a-client-side-rendered-create-react-app-to-microsoft-azure",
+    "publicationDate": "May 25, 2019"
+  },
+  {
+    "title": "React Context API: A Deep Dive with Examples",
+    "publisher": "LogRocket",
+    "href": "https://blog.logrocket.com/react-context-api-deep-dive-example",
+    "publicationDate": "March 24, 2023"
+  },
+  {
+    "title": "Next.js Automatic Image Optimization with next/image",
+    "publisher": "LogRocket",
+    "href": "https://blog.logrocket.com/next-js-automatic-image-optimization-next-image",
+    "publicationDate": "September 16, 2021"
+  },
+  {
+    "title": "Content Management in Next.js with Sanity CMS",
+    "publisher": "LogRocket",
+    "href": "https://blog.logrocket.com/content-management-in-next-js-with-sanity-cms",
+    "publicationDate": "June 1, 2021"
+  },
+  {
+    "title": "Handling JavaScript Errors in React with Error Boundaries",
+    "publisher": "LogRocket",
+    "href": "https://blog.logrocket.com/handling-javascript-errors-react-error-boundaries",
+    "publicationDate": "March 22, 2021"
+  },
+  {
+    "title": "Serverless Deployments Via Vercel Using Node.js",
+    "publisher": "LogRocket",
+    "href": "https://blog.logrocket.com/serverless-deployments-vercel-node-js",
+    "publicationDate": "March 11, 2021"
+  },
+  {
+    "title": "Sanity CMS for Headless Content Management in Gatsby",
+    "publisher": "LogRocket",
+    "href": "https://blog.logrocket.com/sanity-cms-for-content-management-in-gatsby",
+    "publicationDate": "January 11, 2021"
+  },
+  {
+    "title": "A Deep Dive Into the HTML Form Input Element",
+    "publisher": "LogRocket",
+    "href": "https://blog.logrocket.com/a-deep-dive-into-the-html-form-input-element",
+    "publicationDate": "November 11, 2020"
+  },
+  {
+    "title": "10 Gatsby Styling Methods",
+    "publisher": "LogRocket",
+    "href": "https://blog.logrocket.com/10-gatsby-styling-methods",
+    "publicationDate": "August 21, 2020"
+  },
+  {
+    "title": "Creating a React App Toolchain From Scratch",
+    "publisher": "LogRocket",
+    "href": "https://blog.logrocket.com/creating-a-react-app-toolchain-from-scratch",
+    "publicationDate": "July 21, 2020"
+  },
+  {
+    "title": "Formatting Form Inputs with Cleave.js and React",
+    "publisher": "LogRocket",
+    "href": "https://blog.logrocket.com/formatting-form-inputs-with-cleave-js-and-react",
+    "publicationDate": "April 14, 2020"
+  },
+  {
+    "title": "The New Layer0 Docs is the Beginning of a New Beginning",
+    "publisher": "Edg.io",
+    "href": "https://www.layer0.co/post/the-new-layer0-docs",
+    "publicationDate": "June 9, 2022"
+  },
+  {
+    "title": "Celebrating RedwoodJS Launch Week",
+    "publisher": "Edg.io",
+    "href": "https://www.layer0.co/post/celebrating-redwoodjs-launch-week",
+    "publicationDate": "April 4, 2022"
+  },
+  {
+    "title": "NuxtShop: A Nuxt and Shopify eCommerce Starter Kit",
+    "publisher": "Edg.io",
+    "href": "https://www.layer0.co/post/nuxtshop-nuxt-shopify-ecommerce-starter-kit",
+    "publicationDate": "February 9, 2022"
+  },
+  {
+    "title": "Delivering the Bloomreach Experience at the Speed of Layer0",
+    "publisher": "Bloomreach",
+    "href": "https://developers.bloomreach.com/blog/2021/delivering-the-bloomreach-experience-at-the-speed-of-layer-0.html",
+    "publicationDate": "November 11, 2021"
+  },
+  {
+    "title": "How to Leverage MACH to Improve Your Core Web Vitals Score",
+    "publisher": "Edg.io",
+    "href": "http://try.layer0.co/ebooks/leverage-mach-cwv",
+    "publicationDate": "March 11, 2021"
+  },
+  {
+    "title": "Using JavaScript's Sort Method for Sorting Arrays of Strings",
+    "publisher": "Alligator.io / Digital Ocean",
+    "href": "https://www.digitalocean.com/community/tutorials/js-array-sort-strings",
+    "publicationDate": "August 6, 2018"
+  },
+  {
+    "title": "Using JavaScript's Sort Method for Sorting Arrays of Numbers",
+    "publisher": "Alligator.io / Digital Ocean",
+    "href": "https://www.digitalocean.com/community/tutorials/js-array-sort-numbers",
+    "publicationDate": "September 4, 2020"
+  }
+]

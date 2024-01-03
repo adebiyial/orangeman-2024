@@ -3,7 +3,7 @@ interface Props
   extends Pick<HTMLAnchorElement, "href">,
     Partial<Pick<HTMLAnchorElement, "rel" | "target">> {}
 
-const { href, rel = "noopener", target = "_blank" } = Astro.props;
+const { href, rel = "noopener", target } = Astro.props;
 ---
 
 <style>

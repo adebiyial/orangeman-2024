@@ -1,59 +1,28 @@
 ---
-import Hyperlink from "../components/Hyperlink.astro";
-import SectionGrid from "../components/SectionGrid.astro";
+import Intro from "../components/Intro.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Playground from "../components/Playground.astro";
+import Preoccupations from "../components/Preoccupations.astro";
+import Projects from "../components/Projects.astro";
+import Writing from "../components/Writing.astro";
 import Root from "../layouts/Root.astro";
-import { preoccupations, writing, projects, playground } from "../misc/data";
-import links from "../misc/links";
-
-const { websites, pubBylines, socials } = links;
 ---
 
 <Root title="Adebiyi Adedotun">
   <div data-grid="main" data-page="home">
     <article data-prose>
-      <header>
-        <h2 class="name">Adebiyi Adedotun</h2>
-        <strong><span data-comment>//</span> Design & Frontend Engineer.</strong
-        >
-      </header>
-      <section data-grid class="intro">
-        <p>
-          Passionate about building <em>simple</em> and <em>functional</em>
-           web interfaces and experiences.
-        </p>
-        <p>
-          In the past, I've worked at
-          <Hyperlink href={websites.hatchPath}>HatchPath</Hyperlink>,
-          <Hyperlink href={websites.ceviant}>Ceviant</Hyperlink>, and
-          <Hyperlink href={websites.edgio}>Edgio</Hyperlink>. And I'm published
-          on blogs like
-          <Hyperlink href={pubBylines.smashingmag}>
-            Smashing Magazine
-          </Hyperlink>,
-          <Hyperlink href={pubBylines["css-tricks"]}>CSS-Tricks</Hyperlink>, and
-
-
-          <Hyperlink href={pubBylines.logrocket}>LogRocket</Hyperlink>.
-        </p>
-      </section>
-
-      <SectionGrid heading="Projects" gridItems={projects} />
-      <SectionGrid heading="Writing" gridItems={writing} />
-      <SectionGrid
-        heading="Playground"
-        subheading="Where I fail repeatedly, but where things eventually get made."
-        gridItems={playground}
+      <PageHeader
+        heading="Adebiyi Adedotun"
+        subheading="Design & Frontend Engineer."
+        withCommentTag={true}
       />
-      <SectionGrid heading="Preoccupations" gridItems={preoccupations} />
-
-      <footer>
-        <p>
-          Reach me at <Hyperlink href={socials.twitter}>@adebiyial</Hyperlink>
-           or <Hyperlink href={socials.mail}>
-            adebiyiadedotun9@gmail.com
-          </Hyperlink>
-        </p>
-      </footer>
+      <Intro />
+      <hr />
+      <Projects />
+      <Writing />
+      <hr />
+      <Playground />
+      <Preoccupations />
     </article>
   </div>
 </Root>
@@ -72,16 +41,6 @@ const { websites, pubBylines, socials } = links;
       grid-column: 2;
     }
 
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    [data-prose] > header {
-      margin-block-end: var(--gap-3x);
-    }
-
     section {
       margin-block-end: var(--gap-6x);
 
@@ -93,13 +52,20 @@ const { websites, pubBylines, socials } = links;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         column-gap: var(--gap-2x);
         row-gap: var(--gap-3);
+        li {
+          gap: 8px;
+          display: grid;
+          align-content: start;
+        }
       }
+    }
 
-      li {
-        gap: 8px;
-        display: grid;
-        align-content: start;
-      }
+    hr {
+      margin-block-start: 0;
+      margin-block-end: var(--gap-6x);
+      border: none;
+      border-radius: 4px;
+      border-top: 1px solid rgba(30, 55, 38, 0.5);
     }
   }
 </style>

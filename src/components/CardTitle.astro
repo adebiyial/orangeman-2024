@@ -1,0 +1,32 @@
+---
+import { slugify } from "../misc/fns";
+import Hyperlink from "./Hyperlink.astro";
+
+interface Props {
+  title: string;
+  href?: string;
+  target?: "_self" | "_blank";
+}
+
+const { href, target, title } = Astro.props;
+---
+
+<h4>
+  <Hyperlink href={href || slugify(title)}>{title}</Hyperlink>
+  {
+    target === "_blank" && (
+      <span role="img" aria-label="arrow-up-right icon">
+        ↗
+      </span>
+    )
+  }
+</h4>
+
+<style>
+  span[role="img"] {
+    color: #6e8c56;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+  }
+</style>

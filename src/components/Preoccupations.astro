@@ -1,0 +1,33 @@
+---
+import Image from "../components/Image.astro";
+import { preoccupations } from "../misc/data";
+import { slugify } from "../misc/fns";
+import CardSubtitle from "./CardSubtitle.astro";
+import CardTitle from "./CardTitle.astro";
+import SectionHeader from "./SectionHeader.astro";
+---
+
+<section data-grid>
+  <SectionHeader heading="Preoccupations" />
+
+  <ul>
+    {
+      preoccupations.map(({ title, subtitle, url, isExternal }) => (
+        <li>
+          <Image
+            classname="banner"
+            src={`https://avatar.vercel.sh/${slugify(title)}?size=40`}
+            alt={title}
+            height={30}
+          />
+          <CardTitle
+            title={title}
+            href={url}
+            target={isExternal ? "_blank" : "_self"}
+          />
+          <CardSubtitle subtitle={subtitle} />
+        </li>
+      ))
+    }
+  </ul>
+</section>

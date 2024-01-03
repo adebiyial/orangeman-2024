@@ -1,0 +1,14 @@
+---
+import { slugify } from "../misc/fns";
+import Hyperlink from "./Hyperlink.astro";
+
+interface Props {
+  subtitle: string;
+}
+
+const { subtitle } = Astro.props;
+---
+
+<p data-subtitle>
+  <Fragment set:html={subtitle} />
+</p>

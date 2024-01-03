@@ -14,4 +14,10 @@ export default {
     twitter: "https://twitter.com/adebiyial",
     mail: "mailto:adebiyiadedotun9@gmail.com",
   },
+  projects: {
+    nightingale:
+      "https://vscodethemes.com/e/adebiyi-adedotun.nightingale/nightingale",
+    markdoc:
+      "https://vscodethemes.com/e/adebiyi-adedotun.markdoc-theme/markdoc",
+  },
 };

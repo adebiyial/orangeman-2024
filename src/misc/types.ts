@@ -1,9 +1,6 @@
-export interface ISectionGrid {
-  heading: string;
-  subheading?: string;
-  gridItems: Array<{
-    isExternal?: boolean;
-    title: string;
-    subtitle: string;
-  }>;
-}
+export type TCard = Array<{
+  title: string;
+  subtitle: string;
+  isExternal?: boolean;
+  url?: string;
+}>;
