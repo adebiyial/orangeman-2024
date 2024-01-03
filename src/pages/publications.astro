@@ -18,7 +18,10 @@ const groupedPublications = groupBy(publications, "publisher");
         <span>Home</span>
       </Hyperlink>
     </nav>
-    <PageHeader heading="Publications" />
+    <PageHeader
+      heading="Publications"
+      subheading={`# ${publications.length}`}
+    />
     <ul data-grid>
       {
         Object.entries(groupedPublications).map(([key, value]) => {
@@ -97,7 +100,6 @@ const groupedPublications = groupBy(publications, "publisher");
 
     h3 {
       margin-block-end: var(--gap-2x);
-      text-transform: uppercase;
     }
   }
 
