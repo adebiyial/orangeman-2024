@@ -3,6 +3,7 @@ export default {
     hatchPath: "https://hatchpath.io",
     ceviant: "https://www.ceviant.co",
     edgio: "https://edg.io",
+    septum: "https://theseptum.com",
   },
   pubBylines: {
     "css-tricks": "https://css-tricks.com/author/adebiyial",

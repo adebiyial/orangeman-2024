@@ -3,24 +3,22 @@ interface Props {
   classname: string;
   src: string;
   alt: string;
+  height?: number;
 }
-const { classname, src, alt } = Astro.props;
+const { classname, src, alt, height } = Astro.props;
 ---
 
 <picture class={classname}>
-  <img src={src} alt={alt} />
+  <img src={src} alt={alt} style=`height:${height}px` />
 </picture>
 
 <style>
-  picture {
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
   img {
+    border-radius: 4px;
     display: block;
     width: 100%;
     height: auto;
     max-width: 100%;
+    object-fit: cover;
   }
 </style>

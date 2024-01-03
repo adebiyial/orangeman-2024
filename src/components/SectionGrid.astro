@@ -1,0 +1,54 @@
+---
+import Image from "../components/Image.astro";
+import { slugify } from "../misc/fns";
+import type { ISectionGrid } from "../misc/types";
+import Hyperlink from "./Hyperlink.astro";
+
+interface Props extends ISectionGrid {}
+
+const { heading, subheading, gridItems } = Astro.props;
+---
+
+<section data-grid>
+  <header>
+    <h3>{heading}</h3>
+    {subheading && <p data-subtitle>{subheading}</p>}
+  </header>
+  <ul>
+    {
+      gridItems.map(({ title, subtitle, isExternal }) => (
+        <li>
+          <Image
+            classname="banner"
+            src={`https://avatar.vercel.sh/${slugify(title)}?size=30`}
+            alt={title}
+            height={30}
+          />
+          <h4>
+            <Hyperlink href="/">{title}</Hyperlink>
+            {isExternal && (
+              <span role="img" aria-label="arrow-up-right icon">
+                ↗
+              </span>
+            )}
+          </h4>
+          <p data-subtitle>
+            <Fragment set:html={subtitle} />
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  header {
+    margin: 0;
+  }
+
+  span[role="img"] {
+    color: #6e8c56;
+    width: 16px;
+    height: 16px;
+  }
+</style>

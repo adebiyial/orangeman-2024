@@ -1,7 +1,8 @@
 ---
 import Hyperlink from "../components/Hyperlink.astro";
-import Image from "../components/Image.astro";
+import SectionGrid from "../components/SectionGrid.astro";
 import Root from "../layouts/Root.astro";
+import { preoccupations, writing, projects, playground } from "../misc/data";
 import links from "../misc/links";
 
 const { websites, pubBylines, socials } = links;
@@ -26,61 +27,33 @@ const { websites, pubBylines, socials } = links;
           <Hyperlink href={websites.ceviant}>Ceviant</Hyperlink>, and
           <Hyperlink href={websites.edgio}>Edgio</Hyperlink>. And I'm published
           on blogs like
-          <Hyperlink href={pubBylines["css-tricks"]}>CSS-Tricks</Hyperlink>,
           <Hyperlink href={pubBylines.smashingmag}>
             Smashing Magazine
-          </Hyperlink>, and
+          </Hyperlink>,
+          <Hyperlink href={pubBylines["css-tricks"]}>CSS-Tricks</Hyperlink>, and
+
+
           <Hyperlink href={pubBylines.logrocket}>LogRocket</Hyperlink>.
         </p>
+      </section>
+
+      <SectionGrid heading="Projects" gridItems={projects} />
+      <SectionGrid heading="Writing" gridItems={writing} />
+      <SectionGrid
+        heading="Playground"
+        subheading="Where I fail repeatedly, but where things eventually get made."
+        gridItems={playground}
+      />
+      <SectionGrid heading="Preoccupations" gridItems={preoccupations} />
+
+      <footer>
         <p>
           Reach me at <Hyperlink href={socials.twitter}>@adebiyial</Hyperlink>
            or <Hyperlink href={socials.mail}>
             adebiyiadedotun9@gmail.com
           </Hyperlink>
         </p>
-      </section>
-
-      <section data-grid class="misc">
-        <h3>Preoccupations</h3>
-        <ul>
-          <li>
-            <Image
-              classname="banner"
-              src="https://avatar.vercel.sh/Literature?size=40"
-              alt="Literature"
-            />
-            <h4>Literature</h4>
-            <p data-subtitle>
-              Experiencing the power of narrative storytelling through reading
-              and writing.
-            </p>
-          </li>
-          <li>
-            <Image
-              classname="banner"
-              src="https://avatar.vercel.sh/Illustration?size=40"
-              alt="Illustration"
-            />
-            <h4>Illustration</h4>
-            <p data-subtitle>
-              In a world that is what it is, I find Illustration a sweet release
-              that makes failure desirable.
-            </p>
-          </li>
-          <li>
-            <Image
-              classname="banner"
-              src="https://avatar.vercel.sh/Data-Visualization?size=40"
-              alt="Data Visualization"
-            />
-            <h4>Data Visualization</h4>
-            <p data-subtitle>
-              Undeniably daunting, there's an inexplicable beauty in giving life
-              to data.
-            </p>
-          </li>
-        </ul>
-      </section>
+      </footer>
     </article>
   </div>
 </Root>
@@ -103,6 +76,9 @@ const { websites, pubBylines, socials } = links;
       display: flex;
       align-items: center;
       justify-content: space-between;
+    }
+
+    [data-prose] > header {
       margin-block-end: var(--gap-3x);
     }
 
@@ -123,10 +99,6 @@ const { websites, pubBylines, socials } = links;
         gap: 8px;
         display: grid;
         align-content: start;
-      }
-
-      .banner {
-        height: 30px;
       }
     }
   }
