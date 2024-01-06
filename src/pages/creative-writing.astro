@@ -49,12 +49,15 @@ const title = "Creative writing";
     <ul data-grid class="cards">
       {
         articles.map((item) => (
-          <Card
-            title={item.title}
-            description={item.description}
-            imageUrl={item.imageUrl}
-            url={item.url}
-          />
+          <li>
+            <Hyperlink href={item.url} nounderline target="_blank">
+              <Card
+                title={item.title}
+                subtitle={item.description}
+                imageUrl={item.imageUrl}
+              />
+            </Hyperlink>
+          </li>
         ))
       }
     </ul>

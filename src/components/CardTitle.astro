@@ -1,5 +1,4 @@
 ---
-import { slugify } from "../misc/fns";
 import Hyperlink from "./Hyperlink.astro";
 
 interface Props {
@@ -12,7 +11,7 @@ const { href, target, title } = Astro.props;
 ---
 
 <h4>
-  <Hyperlink href={href || slugify(title)}>{title}</Hyperlink>
+  {href ? <Hyperlink href={href}>{title}</Hyperlink> : title}
   {
     target === "_blank" && (
       <span role="img" aria-label="arrow-up-right icon">

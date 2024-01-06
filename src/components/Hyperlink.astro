@@ -1,28 +1,38 @@
 ---
 interface Props
   extends Pick<HTMLAnchorElement, "href">,
-    Partial<Pick<HTMLAnchorElement, "rel" | "target">> {}
+    Partial<Pick<HTMLAnchorElement, "rel" | "target">> {
+  nounderline?: boolean;
+}
 
-const { href, rel = "noopener", target } = Astro.props;
+const { href, rel = "noopener", target, nounderline } = Astro.props;
 ---
 
 <style>
   a {
     display: inline-block;
     transition: var(--transition-xx);
-    transition-property:
-      text-decoration-color,
-      -webkit-text-decoration-color;
     text-decoration: underline;
     text-decoration-color: #6e8c56;
     text-decoration-thickness: 1px;
     text-underline-offset: 2.5px;
+    transition-property:
+      opacity,
+      text-decoration-color,
+      -webkit-text-decoration-color;
 
     &:hover {
       transition: var(--transition-fast);
       -webkit-text-decoration-color: #a6ffbf;
       text-decoration-color: #a6ffbf;
+      opacity: 0.8;
+    }
+
+    &[data-nounderline] {
+      text-decoration: none;
+      text-underline-offset: unset;
+      transition-property: opacity;
     }
   }
 </style>
-<a {...{ href, rel, target }}><slot /></a>
+<a {...{ href, rel, target }} data-nounderline={nounderline}><slot /></a>

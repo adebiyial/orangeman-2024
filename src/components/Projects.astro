@@ -13,7 +13,7 @@ import SectionHeader from "./SectionHeader.astro";
   <ul>
     {
       projects.map(({ title, subtitle, url, isExternal }) => (
-        <li>
+        <li data-card>
           <Image
             classname="banner"
             src={`https://avatar.vercel.sh/${slugify(title)}?size=40`}
@@ -33,7 +33,7 @@ import SectionHeader from "./SectionHeader.astro";
 </section>
 
 <style>
-  li {
+  [data-card] {
     grid-template-columns: 40px 1fr;
     align-items: center;
 

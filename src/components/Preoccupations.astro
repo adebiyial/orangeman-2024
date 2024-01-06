@@ -13,7 +13,7 @@ import SectionHeader from "./SectionHeader.astro";
   <ul>
     {
       preoccupations.map(({ title, subtitle, url, isExternal }) => (
-        <li>
+        <li data-card>
           <Image
             classname="banner"
             src={`https://avatar.vercel.sh/${slugify(title)}?size=20`}

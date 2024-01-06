@@ -5,22 +5,22 @@ import CardTitle from "./CardTitle.astro";
 
 interface Props {
   title: string;
-  description: string;
+  subtitle: string;
   imageUrl: string;
-  url: string;
+  imageHeight?: number;
 }
 
-const { title, description, imageUrl, url } = Astro.props;
+const { title, subtitle, imageUrl, imageHeight } = Astro.props;
 ---
 
-<li>
-  <Image src={imageUrl} alt={title} />
-  <CardTitle title={title} target="_blank" href={url} />
-  <CardSubtitle subtitle={description} />
-</li>
+<div data-card>
+  <Image src={imageUrl} alt={title} height={imageHeight} />
+  <CardTitle title={title} />
+  <CardSubtitle subtitle={subtitle} />
+</div>
 
 <style>
-  li {
+  [data-card] {
     gap: 8px;
     display: grid;
     align-items: start;

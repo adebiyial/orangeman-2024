@@ -9,10 +9,9 @@ import SectionHeader from "./SectionHeader.astro";
 
 <section data-grid>
   <SectionHeader heading="Writing" />
-
-  <ul>
+  <ul data-card>
     {
-      writing.map(({ title, subtitle, url, isExternal }) => (
+      writing.map(({ title, subtitle, isExternal }) => (
         <li>
           <Image
             classname="banner"
@@ -22,7 +21,7 @@ import SectionHeader from "./SectionHeader.astro";
           />
           <CardTitle
             title={title}
-            href={url}
+            href={slugify(title)}
             target={isExternal ? "_blank" : "_self"}
           />
           <CardSubtitle subtitle={subtitle} />
