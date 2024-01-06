@@ -167,18 +167,18 @@ const { title } = Astro.props;
     }
 
     p {
-      line-height: var(--leading);
       margin: 0;
-
-      &[data-subtitle] {
-        font-size: 14px;
-        font-weight: 500;
-        color: #a4a4a4;
-        line-height: 1.5;
-        word-break: break-word;
-        hyphens: auto;
-      }
+      line-height: var(--leading);
     }
+  }
+  [data-subtitle] {
+    font-size: 14px;
+    font-weight: 500;
+    color: #a4a4a4;
+    line-height: 1.5;
+    word-break: break-word;
+    margin: 0;
+    hyphens: auto;
   }
   [data-comment] {
     color: #ff6d00;

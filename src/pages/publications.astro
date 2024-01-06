@@ -8,9 +8,10 @@ import { groupBy } from "../misc/fns";
 import publications from "../misc/publications.json";
 
 const groupedPublications = groupBy(publications, "publisher");
+const title = "Publications";
 ---
 
-<Root title="Publications">
+<Root title={title}>
   <div data-grid="main" data-page="publications">
     <nav>
       <Hyperlink href="/">
@@ -18,10 +19,7 @@ const groupedPublications = groupBy(publications, "publisher");
         <span>Home</span>
       </Hyperlink>
     </nav>
-    <PageHeader
-      heading="Publications"
-      subheading={`# ${publications.length}`}
-    />
+    <PageHeader heading={title} subheading={`# ${publications.length}`} />
     <ul data-grid>
       {
         Object.entries(groupedPublications).map(([key, value]) => {

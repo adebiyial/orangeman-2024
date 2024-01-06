@@ -1,0 +1,28 @@
+---
+import Image from "../components/Image.astro";
+import CardSubtitle from "./CardSubtitle.astro";
+import CardTitle from "./CardTitle.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  imageUrl: string;
+  url: string;
+}
+
+const { title, description, imageUrl, url } = Astro.props;
+---
+
+<li>
+  <Image src={imageUrl} alt={title} />
+  <CardTitle title={title} target="_blank" href={url} />
+  <CardSubtitle subtitle={description} />
+</li>
+
+<style>
+  li {
+    gap: 8px;
+    display: grid;
+    align-items: start;
+  }
+</style>
