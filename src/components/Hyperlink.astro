@@ -18,14 +18,15 @@ const { href, rel = "noopener", target, nounderline } = Astro.props;
     text-underline-offset: 2.5px;
     transition-property:
       opacity,
+      transform,
       text-decoration-color,
       -webkit-text-decoration-color;
 
     &:hover {
-      transition: var(--transition-fast);
-      -webkit-text-decoration-color: #a6ffbf;
-      text-decoration-color: #a6ffbf;
       opacity: 0.8;
+      transform: scale(0.999);
+      transition: var(--transition-fast);
+      text-decoration-color: #a6ffbf;
     }
 
     &[data-nounderline] {

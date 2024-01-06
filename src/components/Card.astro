@@ -10,7 +10,7 @@ interface Props {
   imageHeight?: number;
 }
 
-const { title, subtitle, imageUrl, imageHeight } = Astro.props;
+const { title, subtitle, imageUrl, imageHeight = 20 } = Astro.props;
 ---
 
 <div data-card>
@@ -18,11 +18,3 @@ const { title, subtitle, imageUrl, imageHeight } = Astro.props;
   <CardTitle title={title} />
   <CardSubtitle subtitle={subtitle} />
 </div>
-
-<style>
-  [data-card] {
-    gap: 8px;
-    display: grid;
-    align-items: start;
-  }
-</style>

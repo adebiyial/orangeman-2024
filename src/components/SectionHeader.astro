@@ -1,6 +1,4 @@
 ---
-import Arrow from "./Arrow.astro";
-import Hyperlink from "./Hyperlink.astro";
 interface Props {
   heading: string;
   subheading?: string;
@@ -9,23 +7,14 @@ interface Props {
 const { heading, subheading } = Astro.props;
 ---
 
-<header>
-  <div>
-    <h3>{heading}</h3>
-    <!-- <Hyperlink href="/">
-      All
-      <Arrow angle="right" />
-    </Hyperlink> -->
-  </div>
+<header data-flex>
+  <h3>{heading}</h3>
   {subheading && <p data-subtitle>{subheading}</p>}
 </header>
 
 <style>
   header {
-    > div {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+    align-items: center;
+    justify-content: space-between;
   }
 </style>

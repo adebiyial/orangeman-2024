@@ -4,27 +4,33 @@ import { writing } from "../misc/data";
 import { slugify } from "../misc/fns";
 import CardSubtitle from "./CardSubtitle.astro";
 import CardTitle from "./CardTitle.astro";
+import Hyperlink from "./Hyperlink.astro";
 import SectionHeader from "./SectionHeader.astro";
+
+const imageHeight = 40;
 ---
 
 <section data-grid>
   <SectionHeader heading="Writing" />
-  <ul data-card>
+
+  <ul data-list>
     {
-      writing.map(({ title, subtitle, isExternal }) => (
-        <li>
-          <Image
-            classname="banner"
-            src={`https://avatar.vercel.sh/${slugify(title)}?size=40`}
-            alt={title}
-            height={40}
-          />
-          <CardTitle
-            title={title}
-            href={slugify(title)}
-            target={isExternal ? "_blank" : "_self"}
-          />
-          <CardSubtitle subtitle={subtitle} />
+      writing.map(({ title, subtitle }) => (
+        <li data-list-item>
+          <Hyperlink href={slugify(title)} nounderline>
+            <div data-card>
+              <Image
+                classname="banner"
+                src={`https://avatar.vercel.sh/${slugify(
+                  title
+                )}?size=${imageHeight}`}
+                alt={title}
+                height={imageHeight}
+              />
+              <CardTitle title={title} />
+              <CardSubtitle subtitle={subtitle} />
+            </div>
+          </Hyperlink>
         </li>
       ))
     }
@@ -32,7 +38,11 @@ import SectionHeader from "./SectionHeader.astro";
 </section>
 
 <style>
-  li {
+  [data-list-item] a {
+    text-decoration: none;
+  }
+
+  [data-list-item] [data-card] {
     grid-template-columns: 40px 1fr;
     align-items: center;
 

@@ -4,7 +4,10 @@ import { playground } from "../misc/data";
 import { slugify } from "../misc/fns";
 import CardSubtitle from "./CardSubtitle.astro";
 import CardTitle from "./CardTitle.astro";
+import Hyperlink from "./Hyperlink.astro";
 import SectionHeader from "./SectionHeader.astro";
+
+const imageHeight = 25;
 ---
 
 <section data-grid>
@@ -13,22 +16,24 @@ import SectionHeader from "./SectionHeader.astro";
     subheading="Where I fail repeatedly, but where things eventually get made."
   />
 
-  <ul data-card>
+  <ul data-list>
     {
-      playground.map(({ title, subtitle, url, isExternal }) => (
-        <li>
-          <Image
-            classname="banner"
-            src={`https://avatar.vercel.sh/${slugify(title)}?size=20`}
-            alt={title}
-            height={20}
-          />
-          <CardTitle
-            title={title}
-            href={url}
-            target={isExternal ? "_blank" : "_self"}
-          />
-          <CardSubtitle subtitle={subtitle} />
+      playground.map(({ title, subtitle }) => (
+        <li data-list-item>
+          <Hyperlink href={slugify(title)} nounderline>
+            <div data-card>
+              <Image
+                classname="banner"
+                src={`https://avatar.vercel.sh/${slugify(
+                  title
+                )}?size=${imageHeight}`}
+                alt={title}
+                height={imageHeight}
+              />
+              <CardTitle title={title} />
+              <CardSubtitle subtitle={subtitle} />
+            </div>
+          </Hyperlink>
         </li>
       ))
     }
