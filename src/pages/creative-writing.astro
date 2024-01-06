@@ -85,21 +85,6 @@ const title = "Creative writing";
     }
   }
 
-  [data-grid="main"] {
-    grid-template-columns: 12rem var(--content-width) 12rem;
-    column-gap: 24px;
-
-    > * {
-      grid-column: 2;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-  }
-
   span[role="img"] {
     color: #6e8c56;
     width: 16px;
@@ -110,6 +95,16 @@ const title = "Creative writing";
   [data-grid] {
     grid-template-columns: 12rem 1fr;
     align-items: start;
+
+    > * {
+      grid-column: -1;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
     h3 {
       margin-block-end: var(--gap-2x);

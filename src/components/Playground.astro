@@ -1,9 +1,7 @@
 ---
-import Image from "../components/Image.astro";
 import { playground } from "../misc/data";
 import { slugify } from "../misc/fns";
-import CardSubtitle from "./CardSubtitle.astro";
-import CardTitle from "./CardTitle.astro";
+import Card from "./Card.astro";
 import Hyperlink from "./Hyperlink.astro";
 import SectionHeader from "./SectionHeader.astro";
 
@@ -21,18 +19,16 @@ const imageHeight = 25;
       playground.map(({ title, subtitle }) => (
         <li data-list-item>
           <Hyperlink href={slugify(title)} nounderline>
-            <div data-card>
-              <Image
-                classname="banner"
-                src={`https://avatar.vercel.sh/${slugify(
+            <Card
+              {...{
+                title,
+                subtitle,
+                imageUrl: `https://avatar.vercel.sh/${slugify(
                   title
-                )}?size=${imageHeight}`}
-                alt={title}
-                height={imageHeight}
-              />
-              <CardTitle title={title} />
-              <CardSubtitle subtitle={subtitle} />
-            </div>
+                )}?size=${imageHeight}`,
+                imageHeight,
+              }}
+            />
           </Hyperlink>
         </li>
       ))

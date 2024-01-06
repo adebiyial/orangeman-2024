@@ -160,7 +160,12 @@ const { title } = Astro.props;
   /* Defaults */
   [data-grid] {
     display: grid;
+
+    &[data-grid-col="3"] {
+      grid-template-columns: 12rem var(--content-width) 12rem;
+    }
   }
+
   [data-flex] {
     display: flex;
   }
@@ -178,7 +183,6 @@ const { title } = Astro.props;
 
   [data-subtitle] {
     font-size: 14px;
-    /* font-weight: 500; */
     color: #a4a4a4;
     line-height: 1.5;
     word-break: break-word;
@@ -188,7 +192,6 @@ const { title } = Astro.props;
 
   /* hr */
   hr {
-    margin-block: 0 var(--gap-6x);
     border: none;
     border-radius: 4px;
     border-top: 1px solid rgba(30, 55, 38, 0.5);
@@ -202,5 +205,16 @@ const { title } = Astro.props;
     gap: 8px;
     display: grid;
     align-items: start;
+  }
+
+  /* Layout */
+  [data-layout-center] {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding-block: var(--page-top);
+
+    > * {
+      grid-column: 2;
+    }
   }
 </style>

@@ -9,7 +9,7 @@ import Root from "../layouts/Root.astro";
 ---
 
 <Root title="Adebiyi Adedotun">
-  <div data-grid="main" data-page="home">
+  <div data-grid="main" data-grid-col="3" data-layout-center>
     <article data-prose>
       <PageHeader
         heading="Adebiyi Adedotun"
@@ -28,34 +28,19 @@ import Root from "../layouts/Root.astro";
 </Root>
 
 <style>
-  [data-page="home"] {
-    max-width: var(--page-width);
-    margin: 0 auto;
-    padding-block: var(--page-top);
-  }
+  [data-prose] {
+    > *:not(header) {
+      margin-block: 0 var(--gap-6x);
 
-  [data-grid="main"] {
-    grid-template-columns: 12rem var(--content-width) 12rem;
-
-    > * {
-      grid-column: 2;
-    }
-
-    section {
-      margin-block-end: var(--gap-6x);
-
-      ul {
-        list-style: none;
+      [data-list] {
         padding: 0;
         margin-block-start: 0;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        column-gap: var(--gap-2x);
-        row-gap: var(--gap-3);
-        li {
-          gap: 8px;
-          display: grid;
-          align-content: start;
+        gap: var(--gap-3x) var(--gap-2x);
+
+        [data-list-item] {
+          display: inherit;
         }
       }
     }

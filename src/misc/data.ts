@@ -40,19 +40,16 @@ export const projects: TCard = [
   {
     title: "Nightingale",
     subtitle: "VSCode theme for nocturnal folks.",
-    isExternal: true,
     url: links.projects.nightingale,
   },
   {
     title: "Markdoc",
     subtitle: "VSCode theme inspired by Markdoc.",
-    isExternal: true,
     url: links.projects.markdoc,
   },
   {
     title: "The Septum",
     subtitle: "Website for a media and publication company.",
-    isExternal: true,
     url: links.websites.septum,
   },
 ];

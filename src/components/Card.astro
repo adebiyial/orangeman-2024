@@ -18,3 +18,11 @@ const { title, subtitle, imageUrl, imageHeight = 20 } = Astro.props;
   <CardTitle title={title} />
   <CardSubtitle subtitle={subtitle} />
 </div>
+
+<style>
+  [data-card]:hover {
+    :where(picture, image) {
+      filter: grayscale();
+    }
+  }
+</style>
