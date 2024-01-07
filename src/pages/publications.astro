@@ -1,48 +1,47 @@
 ---
-import Arrow from "../components/Arrow.astro";
 import Hyperlink from "../components/Hyperlink.astro";
 import PageHeader from "../components/PageHeader.astro";
+import PageNav from "../components/PageNav.astro";
 import Root from "../layouts/Root.astro";
-import { groupBy } from "../misc/fns";
+import { getIdFromUrl, groupBy } from "../misc/fns";
 import publications from "../misc/publications.json";
 
-const groupedPublications = Object.entries(groupBy(publications, "publisher"));
 const title = "Publications";
+const groupedPublications = Object.entries(groupBy(publications, "publisher"));
+const toc = groupedPublications.map(([key, value]) => ({
+  title: key,
+  href: getIdFromUrl(value[0].href),
+}));
 ---
 
 <Root title={title}>
-  <div data-grid="main" data-grid-col="3" data-layout-center>
-    <nav>
-      <Hyperlink href="/">
-        <Arrow angle="left" />
-        <span>Home</span>
-      </Hyperlink>
-    </nav>
+  <div data-grid data-grid-col="3" data-layout-center>
+    <PageNav toc={toc} />
     <PageHeader heading={title} subheading={`# ${publications.length}`} />
-    <ul data-grid>
+    <ul data-list>
       {
-        groupedPublications.map(([key, value]) => {
-          return (
-            <li>
-              <h3>{key}</h3>
-              <ol>
-                {value.map(({ title, href, publicationDate }) => {
-                  return (
-                    <li>
-                      <Hyperlink href={href} target="_blank">
-                        {title}
-                        <time datetime={publicationDate} data-subtitle>
-                          {publicationDate}
-                        </time>
-                      </Hyperlink>
-                    </li>
-                  );
-                })}
-              </ol>
-              <PageHeader heading="" subheading={`# ${value.length}`} />
-            </li>
-          );
-        })
+        groupedPublications.map(([key, value]) => (
+          <li data-list-item>
+            <h4 class="publication" id={getIdFromUrl(value[0].href)}>
+              {key}
+            </h4>
+            <ul data-list>
+              {value.map(({ title, href, publicationDate }) => {
+                return (
+                  <li>
+                    <Hyperlink href={href} target="_blank" nounderline>
+                      {title}
+                      <time datetime={publicationDate} data-subtitle>
+                        {publicationDate}
+                      </time>
+                    </Hyperlink>
+                  </li>
+                );
+              })}
+            </ul>
+            <PageHeader heading="" subheading={`# ${value.length}`} />
+          </li>
+        ))
       }
     </ul>
   </div>
@@ -50,62 +49,31 @@ const title = "Publications";
 
 <style>
   [data-layout-center] {
-    > nav {
-      position: sticky;
-      top: var(--page-top);
-      white-space: nowrap;
-      z-index: 1;
-      grid-column: 1;
-      font-size: 20px;
+    column-gap: var(--gap-4x);
 
-      a {
-        text-decoration: none;
-        font-weight: medium;
-      }
-    }
-  }
-
-  [data-grid="main"] {
-    column-gap: 24px;
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-  }
-
-  span[role="img"] {
-    color: #6e8c56;
-    width: 16px;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  [data-grid] {
-    > li {
-      margin-block-end: var(--gap-6x);
+    > [data-list] {
+      margin-block: var(--gap-s);
     }
 
-    h3 {
+    [data-list-item],
+    .publication {
       margin-block-end: var(--gap-2x);
     }
-  }
 
-  ul,
-  ol {
-    list-style: none;
-    padding: 0;
-  }
+    .publication {
+      width: fit-content;
+      scroll-margin-top: var(--page-top);
+    }
 
-  ol {
-    margin-bottom: var(--gap-s);
-    li a {
-      display: flex;
-      justify-content: space-between;
-      text-decoration: none;
-      padding: 0.6rem 0;
-      border-block-end: 1px solid rgba(30, 55, 38, 0.5);
+    .publication + ul {
+      margin-bottom: var(--gap-s);
+
+      li a {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--gap) 0;
+        border-block-end: 1px solid rgba(30, 55, 38, 0.5);
+      }
     }
   }
 </style>

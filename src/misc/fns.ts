@@ -9,3 +9,7 @@ export function groupBy(array: Array<Tarray>, key: keyof Tarray) {
     return result;
   }, {} as { [key: string]: Array<Tarray> });
 }
+
+export function getIdFromUrl(url: string) {
+  return new URL(url).hostname.replace(/^www\.|\.com$/g, "");
+}

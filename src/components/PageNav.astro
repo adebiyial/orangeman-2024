@@ -1,0 +1,73 @@
+---
+import Arrow from "./Arrow.astro";
+import Hyperlink from "./Hyperlink.astro";
+
+interface Props {
+  toc: Array<{
+    title: string;
+    href: string;
+  }>;
+}
+
+const { toc } = Astro.props;
+---
+
+<aside data-grid>
+  <Hyperlink href="/" nounderline>
+    <Arrow angle="left" />
+    <span>Home</span>
+  </Hyperlink>
+  <nav>
+    <ul class="toc">
+      {
+        toc.map(({ href, title }) => (
+          <li>
+            <Hyperlink href={`#${href}`} nounderline>
+              <p data-subtitle>{title}</p>
+            </Hyperlink>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <style>
+    aside {
+      position: sticky;
+      top: calc(var(--page-top) + 3px);
+      white-space: nowrap;
+      z-index: 1;
+      grid-column: 1;
+      height: 0;
+      row-gap: var(--gap-3x);
+
+      > a {
+        display: inline-flex;
+        gap: 4px;
+        font-size: 14px;
+        align-items: center;
+        line-height: 1;
+        padding: var(--gap);
+        padding-left: 0;
+      }
+    }
+
+    .toc {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      a {
+        width: 100%;
+
+        &:hover [data-subtitle] {
+          color: var(--default-fg);
+        }
+      }
+
+      [data-subtitle] {
+        padding: var(--gap-s) 0;
+      }
+    }
+  </style>
+</aside>

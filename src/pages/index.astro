@@ -6,14 +6,17 @@ import Preoccupations from "../components/Preoccupations.astro";
 import Projects from "../components/Projects.astro";
 import Writing from "../components/Writing.astro";
 import Root from "../layouts/Root.astro";
+
+const title = "Adebiyi Adedotun";
+const occupation = "Design & Frontend Engineer.";
 ---
 
-<Root title="Adebiyi Adedotun">
-  <div data-grid="main" data-grid-col="3" data-layout-center>
+<Root title={title}>
+  <div data-grid data-grid-col="3" data-layout-center>
     <article data-prose>
       <PageHeader
-        heading="Adebiyi Adedotun"
-        subheading="Design & Frontend Engineer."
+        heading={title}
+        subheading={occupation}
         withCommentTag={true}
       />
       <Intro />
