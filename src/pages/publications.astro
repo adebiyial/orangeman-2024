@@ -1,46 +1,55 @@
 ---
+import { group, sort } from "d3-array";
 import Hyperlink from "../components/Hyperlink.astro";
 import PageHeader from "../components/PageHeader.astro";
 import PageNav from "../components/PageNav.astro";
 import Root from "../layouts/Root.astro";
-import { getIdFromUrl, groupBy } from "../misc/fns";
+import { slugify } from "../misc/fns";
 import publications from "../misc/publications.json";
 
 const title = "Publications";
-const groupedPublications = Object.entries(groupBy(publications, "publisher"));
-const toc = groupedPublications.map(([key, value]) => ({
+
+const sortedPublications = sort(
+  publications,
+  (d) => -new Date(d.publicationDate).getFullYear()
+);
+const groupedPublications = Array.from(
+  group(sortedPublications, (d) => d.publisher)
+);
+const toc = groupedPublications.map(([key]) => ({
   title: key,
-  href: getIdFromUrl(value[0].href),
 }));
 ---
 
 <Root title={title}>
   <div data-grid data-grid-col="3" data-layout-center>
     <PageNav toc={toc} />
-    <PageHeader heading={title} subheading={`# ${publications.length}`} />
+    <PageHeader heading={title} subheading={publications.length} symbol="#" />
     <ul data-list>
       {
         groupedPublications.map(([key, value]) => (
-          <li data-list-item>
-            <h4 class="publication" id={getIdFromUrl(value[0].href)}>
-              {key}
-            </h4>
-            <ul data-list>
-              {value.map(({ title, href, publicationDate }) => {
-                return (
-                  <li>
-                    <Hyperlink href={href} target="_blank" nounderline>
-                      {title}
-                      <time datetime={publicationDate} data-subtitle>
-                        {publicationDate}
-                      </time>
-                    </Hyperlink>
-                  </li>
-                );
-              })}
-            </ul>
-            <PageHeader heading="" subheading={`# ${value.length}`} />
-          </li>
+          <>
+            <li data-list-item>
+              <h4 class="title" id={slugify(key)}>
+                {key}
+              </h4>
+              <ul data-list>
+                {value.map(({ title, href, publicationDate }) => {
+                  return (
+                    <li>
+                      <Hyperlink href={href} target="_blank" nounderline>
+                        {title}
+                        <time datetime={publicationDate} data-subtitle>
+                          {publicationDate}
+                        </time>
+                      </Hyperlink>
+                    </li>
+                  );
+                })}
+              </ul>
+              <PageHeader heading="" subheading={value.length} symbol="#" />
+            </li>
+          </>
         ))
       }
     </ul>
@@ -55,24 +64,40 @@ const toc = groupedPublications.map(([key, value]) => ({
       margin-block: var(--gap-s);
     }
 
-    [data-list-item],
-    .publication {
-      margin-block-end: var(--gap-2x);
-    }
+    [data-list-item] {
+      margin-block-end: var(--gap-3x);
 
-    .publication {
-      width: fit-content;
-      scroll-margin-top: var(--page-top);
-    }
+      header {
+        padding-block: 0 var(--gap);
+        margin: 0 0 0 auto;
+        border-bottom: 1px solid var(--green-fade);
+        width: fit-content;
+        border-top: transparent;
+        position: relative;
+        top: -2px;
+        background-color: var(--bg);
 
-    .publication + ul {
-      margin-bottom: var(--gap-s);
+        &::after {
+          content: "";
+          position: absolute;
+          height: 100%;
+          width: var(--gap);
+          left: calc(-1 * var(--gap));
+          background: inherit;
+        }
+      }
+
+      .title {
+        margin-block-end: var(--gap-2x);
+        width: fit-content;
+        scroll-margin-top: var(--page-top);
+      }
 
       li a {
         display: flex;
         justify-content: space-between;
         padding: var(--gap) 0;
-        border-block-end: 1px solid rgba(30, 55, 38, 0.5);
+        border-block-end: 1px solid var(--green-fade);
       }
     }
   }

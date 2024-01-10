@@ -1,4 +1,9 @@
-export const slugify = (text: string) => text.toLowerCase().replace(" ", "-");
+export const slugify = (text: string | number) =>
+  String(text)
+    .toLowerCase()
+    .replaceAll(" ", "-")
+    .replaceAll("/", "")
+    .replaceAll(".", "");
 
 type Tarray = { [key: string]: string };
 export function groupBy(array: Array<Tarray>, key: keyof Tarray) {

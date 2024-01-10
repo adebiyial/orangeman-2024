@@ -1,0 +1,123 @@
+---
+import { group, sort } from "d3-array";
+import Hyperlink from "../../components/Hyperlink.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import PageNav from "../../components/PageNav.astro";
+import Root from "../../layouts/Root.astro";
+import rawPosts from "../../misc/posts.json";
+import { slugify } from "../../misc/fns";
+
+const title = "Weblog";
+
+const sortedPosts = sort(
+  rawPosts,
+  (d) => -new Date(d.publicationDate).getFullYear()
+);
+const groupedPosts = Array.from(
+  group(sortedPosts, (d) => new Date(d.publicationDate).getFullYear())
+);
+const toc = groupedPosts.map(([key]) => ({
+  title: String(key),
+}));
+---
+
+<Root title={title}>
+  <div data-grid data-grid-col="3" data-layout-center>
+    <PageNav toc={toc} />
+    <PageHeader heading={title} subheading={sortedPosts.length} symbol="#" />
+    <ul data-list data-grid>
+      {
+        groupedPosts.map(([key, value]) => (
+          <li data-list-item data-grid>
+            <h4 class="title" id={slugify(key)}>
+              {key}
+            </h4>
+            <ul data-list>
+              {value.map(({ title, href, publicationDate }) => {
+                const date = new Date(publicationDate).toLocaleDateString(
+                  "en-US",
+                  {
+                    month: "long",
+                    day: "numeric",
+                  }
+                );
+
+                return (
+                  <li>
+                    <Hyperlink
+                      href={`${Astro.url.pathname}/${href}`}
+                      nounderline
+                    >
+                      {title}
+                      <time datetime={publicationDate} data-subtitle>
+                        {date}
+                      </time>
+                    </Hyperlink>
+                  </li>
+                );
+              })}
+            </ul>
+            <PageHeader heading="" subheading={value.length} symbol="#" />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Root>
+
+<style>
+  [data-layout-center] {
+    column-gap: var(--gap-4x);
+
+    > [data-list] {
+      margin-block: var(--gap-s);
+      gap: var(--gap-2x);
+    }
+
+    [data-list-item] {
+      grid-template-columns: auto 1fr;
+      column-gap: var(--gap-4x);
+      align-items: start;
+      justify-content: end;
+
+      header {
+        padding-block: 0 var(--gap);
+        margin: 0 0 0 auto;
+        grid-column: 2;
+        border-bottom: 1px solid var(--green-fade);
+        width: fit-content;
+        border-top: transparent;
+        position: relative;
+        top: -2px;
+        background-color: var(--bg);
+
+        &::after {
+          content: "";
+          position: absolute;
+          height: 100%;
+          width: var(--gap);
+          left: calc(-1 * var(--gap));
+          background: inherit;
+        }
+      }
+
+      .title {
+        font-variant: tabular-nums;
+        padding-block-start: var(--gap);
+        scroll-margin-top: var(--page-top);
+        position: sticky;
+        top: calc(var(--page-top) + 3px);
+      }
+
+      li a {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--gap) 0;
+        border-block-end: 1px solid var(--green-fade);
+      }
+
+      li a {
+      }
+    }
+  }
+</style>

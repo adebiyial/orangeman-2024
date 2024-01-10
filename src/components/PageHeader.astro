@@ -1,17 +1,17 @@
 ---
 interface Props {
   heading: string;
-  subheading?: string;
-  withCommentTag?: boolean;
+  subheading?: string | number;
+  symbol?: string;
 }
 
-const { heading, subheading, withCommentTag = false } = Astro.props;
+const { heading, subheading, symbol } = Astro.props;
 ---
 
 <header>
   <h2>{heading}</h2>
   <strong>
-    {withCommentTag && <span data-comment>//</span>}
+    {symbol && <span data-comment>{symbol}</span>}
     {subheading}
   </strong>
 </header>

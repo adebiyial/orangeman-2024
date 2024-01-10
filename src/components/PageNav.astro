@@ -1,11 +1,12 @@
 ---
+import { slugify } from "../misc/fns";
 import Arrow from "./Arrow.astro";
 import Hyperlink from "./Hyperlink.astro";
 
 interface Props {
   toc?: Array<{
     title: string;
-    href: string;
+    href?: string;
   }>;
 }
 
@@ -23,7 +24,7 @@ const { toc } = Astro.props;
         <ul class="toc">
           {toc.map(({ href, title }) => (
             <li>
-              <Hyperlink href={`#${href}`} nounderline>
+              <Hyperlink href={`#${slugify(href || title)}`} nounderline>
                 <p data-subtitle>{title}</p>
               </Hyperlink>
             </li>
@@ -54,21 +55,26 @@ const { toc } = Astro.props;
     }
   }
 
-  .toc {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  nav {
+    height: 50vh;
+    overflow: scroll;
 
-    a {
-      width: 100%;
+    .toc {
+      list-style: none;
+      padding: 0;
+      margin: 0;
 
-      &:hover [data-subtitle] {
-        color: var(--default-fg);
+      a {
+        width: 100%;
+
+        &:hover [data-subtitle] {
+          color: var(--default-fg);
+        }
       }
-    }
 
-    [data-subtitle] {
-      padding: var(--gap-s) 0;
+      [data-subtitle] {
+        padding: var(--gap-s) 0;
+      }
     }
   }
 </style>
