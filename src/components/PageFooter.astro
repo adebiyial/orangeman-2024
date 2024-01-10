@@ -1,0 +1,69 @@
+---
+import links from "../misc/links";
+import Hyperlink from "./Hyperlink.astro";
+import { Image } from "astro:assets";
+import instagram from "../images/socials/instagram.svg?raw";
+import x from "../images/socials/x.svg?raw";
+import github from "../images/socials/github.svg?raw";
+import threads from "../images/socials/threads.svg?raw";
+import linkedin from "../images/socials/linkedin.svg?raw";
+
+const socialIcons: Record<string, string> = {
+  x: x,
+  github: github,
+  threads: threads,
+  linkedin: linkedin,
+  instagram: instagram,
+};
+
+const socials = Object.entries(links.socials).filter(([key]) => key !== "mail");
+
+console.log();
+---
+
+<footer data-grid data-grid-col="3">
+  <!-- <p class="breadcrumbs">{Astro.url.pathname}</p> -->
+  <div>
+    <p class="quote">The Secret Is to Be Happy.</p>
+    <ul data-list data-flex>
+      {
+        socials.map(([key, value]) => {
+          return (
+            <li data-list-item>
+              <Hyperlink href={value.href} target="_blank" nounderline>
+                <Fragment set:html={socialIcons[key.toLowerCase()]} />
+              </Hyperlink>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</footer>
+
+<style>
+  footer {
+    margin: 0 auto;
+    max-width: var(--page-width);
+
+    > div {
+      border-block-start: 1px solid var(--green-fade);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--light-gray);
+      grid-column: 2;
+    }
+  }
+
+  [data-list] {
+    margin: 0;
+    column-gap: var(--gap);
+  }
+
+  [data-list-item] {
+    a {
+      width: 1rem;
+    }
+  }
+</style>

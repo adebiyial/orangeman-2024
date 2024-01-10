@@ -11,8 +11,36 @@ export default {
     logrocket: "https://blog.logrocket.com/author/adebiyial",
   },
   socials: {
-    twitter: "https://twitter.com/adebiyial",
-    mail: "mailto:adebiyiadedotun9@gmail.com",
+    x: {
+      title: "X",
+      href: "https://twitter.com/adebiyial",
+      imgSrc: "images/socials/x.svg",
+    },
+    mail: {
+      title: "mail",
+      href: "mailto:adebiyiadedotun9@gmail.com",
+      imgSrc: "images/socials/x.svg",
+    },
+    instagram: {
+      title: "Instagram",
+      href: "https://instagram.com/adebiyial",
+      imgSrc: "images/socials/x.svg",
+    },
+    threads: {
+      title: "Threads",
+      href: "https://www.threads.net/@adebiyial",
+      imgSrc: "images/socials/x.svg",
+    },
+    linkedin: {
+      title: "LinkedIn",
+      href: "https://linkedin.com/in/adebiyiadedotun",
+      imgSrc: "images/socials/x.svg",
+    },
+    github: {
+      title: "GitHub",
+      href: "https://github.com/adebiyial",
+      imgSrc: "images/socials/x.svg",
+    },
   },
   projects: {
     nightingale:
