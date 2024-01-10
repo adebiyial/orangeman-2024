@@ -163,6 +163,10 @@ const { title } = Astro.props;
   [data-grid] {
     display: grid;
 
+    &[data-grid-col="2"] {
+      grid-template-columns: 12rem var(--content-width);
+    }
+
     &[data-grid-col="3"] {
       grid-template-columns: 12rem var(--content-width) 12rem;
     }

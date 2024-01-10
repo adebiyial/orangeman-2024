@@ -1,9 +1,9 @@
 ---
 import urlMetadata from "url-metadata";
-import Arrow from "../components/Arrow.astro";
 import Card from "../components/Card.astro";
 import Hyperlink from "../components/Hyperlink.astro";
 import PageHeader from "../components/PageHeader.astro";
+import PageNav from "../components/PageNav.astro";
 import Root from "../layouts/Root.astro";
 
 const urls = [
@@ -16,21 +16,25 @@ const urls = [
 ];
 
 async function fetchArticles() {
-  const metadata = (url: string) =>
-    urlMetadata(url, {
-      mode: "cors",
-      includeResponseBody: false,
-    });
-  const resArray = await Promise.all(urls.map((url) => metadata(url)));
+  try {
+    const metadata = (url: string) =>
+      urlMetadata(url, {
+        mode: "cors",
+        includeResponseBody: false,
+      });
+    const resArray = await Promise.all(urls.map((url) => metadata(url)));
 
-  const articles: Array<Record<string, string>> = resArray.map((res) => ({
-    title: String(res["og:title"] || res.title),
-    description: String(res["og:description"] || res.description),
-    imageUrl: String(res["og:image"]),
-    url: String(res["og:url"] || res["canonical"] || res["url"]),
-  }));
+    const articles: Array<Record<string, string>> = resArray.map((res) => ({
+      title: String(res["og:title"] || res.title),
+      description: String(res["og:description"] || res.description),
+      imageUrl: String(res["og:image"]),
+      url: String(res["og:url"] || res["canonical"] || res["url"]),
+    }));
 
-  return articles;
+    return articles;
+  } catch (error) {
+    throw Error("Something went wrong...");
+  }
 }
 
 const articles = await fetchArticles();
@@ -38,18 +42,14 @@ const title = "Creative writing";
 ---
 
 <Root title={title}>
-  <div data-grid="main" data-page="publications">
-    <nav>
-      <Hyperlink href="/">
-        <Arrow angle="left" />
-        <span>Home</span>
-      </Hyperlink>
-    </nav>
+  <div data-grid data-grid-col="2" data-layout-center>
+    <PageNav />
     <PageHeader heading={title} subheading={`# ${articles.length}`} />
-    <ul data-grid class="cards">
+
+    <ul data-grid data-list>
       {
         articles.map((item) => (
-          <li>
+          <li data-list-item>
             <Hyperlink href={item.url} nounderline target="_blank">
               <Card
                 title={item.title}
@@ -65,70 +65,13 @@ const title = "Creative writing";
 </Root>
 
 <style>
-  [data-page="publications"] {
-    max-width: var(--page-width);
-    margin: 0 auto;
-    padding-block: var(--page-top);
-
-    > nav {
-      position: sticky;
-      top: var(--page-top);
-      white-space: nowrap;
-      z-index: 1;
-      grid-column: 1;
-      font-size: 20px;
-
-      a {
-        text-decoration: none;
-        font-weight: medium;
-      }
-    }
+  [data-layout-center] {
+    column-gap: var(--gap-4x);
+    --content-width: 1fr;
   }
 
-  span[role="img"] {
-    color: #6e8c56;
-    width: 16px;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  [data-grid] {
-    grid-template-columns: 12rem 1fr;
-    align-items: start;
-
-    > * {
-      grid-column: -1;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    h3 {
-      margin-block-end: var(--gap-2x);
-    }
-
-    &.cards {
-      grid-template-columns: repeat(3, 1fr);
-      grid-gap: 1rem;
-    }
-  }
-
-  ul,
-  ol {
-    list-style: none;
-    padding: 0;
-  }
-
-  ol {
-    li a {
-      display: flex;
-      justify-content: space-between;
-      text-decoration: none;
-      padding: 0.6rem 0;
-      border-block-end: 1px solid rgba(30, 55, 38, 0.5);
-    }
+  [data-list] {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--gap-3x) var(--gap-2x);
   }
 </style>

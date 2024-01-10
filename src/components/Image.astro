@@ -5,19 +5,23 @@ interface Props {
   alt: string;
   height?: number;
 }
-const { classname, src, alt, height } = Astro.props;
+const { classname, src, alt, height = "auto" } = Astro.props;
 ---
 
 <picture class={classname}>
-  <img src={src} alt={alt} style=`height:${height}px;` />
+  <img src={src} alt={alt} />
 </picture>
 
-<style>
+<style
+  define:vars={{
+    height: `${typeof height === "string" ? height : `${height}px`}`,
+  }}
+>
   img {
     border-radius: 4px;
     display: block;
     width: 100%;
-    height: auto;
+    height: var(--height);
     max-width: 100%;
     object-fit: cover;
   }
