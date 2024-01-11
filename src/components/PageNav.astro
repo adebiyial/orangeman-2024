@@ -1,6 +1,5 @@
 ---
 import { slugify } from "../misc/fns";
-import Arrow from "./Arrow.astro";
 import Hyperlink from "./Hyperlink.astro";
 
 interface Props {
@@ -14,14 +13,16 @@ const { toc } = Astro.props;
 ---
 
 <aside data-grid>
-  <Hyperlink href="/" nounderline>
-    <Arrow angle="left" />
-    <span>Home</span>
-  </Hyperlink>
+  <span>↓ Table of content</span>
   {
     toc && (
       <nav>
         <ul class="toc">
+          <li>
+            <Hyperlink href={Astro.url.pathname} nounderline>
+              <p data-subtitle>Overview</p>
+            </Hyperlink>
+          </li>
           {toc.map(({ href, title }) => (
             <li>
               <Hyperlink href={`#${slugify(href || title)}`} nounderline>
@@ -45,13 +46,9 @@ const { toc } = Astro.props;
     height: 0;
     gap: var(--gap-3x);
 
-    > a {
-      display: inline-flex;
-      gap: 4px;
-      font-size: 14px;
-      align-items: center;
-      line-height: 1;
-      position: relative;
+    > span {
+      color: var(--light-gray);
+      font-weight: 600;
     }
   }
 

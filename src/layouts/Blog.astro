@@ -1,0 +1,17 @@
+<article data-grid>
+  <slot />
+</article>
+
+<style>
+  article {
+    gap: 24px 0;
+    --leading: 1.9;
+
+    [data-heading] {
+      width: fit-content;
+      margin-top: var(--gap-6x);
+      padding-block-end: var(--gap);
+      border-block-end: 1px solid rgb(30, 55, 38);
+    }
+  }
+</style>

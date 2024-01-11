@@ -1,0 +1,46 @@
+---
+title: "Yet Another Redesign"
+date: "September 22, 2023"
+---
+
+import Root from "../../layouts/Root.astro";
+import Blog from "../../layouts/Blog.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Hyperlink from "../../components/Hyperlink.astro";
+
+<Root title={frontmatter.title}>
+  <div data-grid data-grid-col="3" data-layout-center>
+    <PageHeader
+      heading={frontmatter.title}
+      subheading={frontmatter.date}
+      symbol="#"
+    />
+    <Blog>
+      It is no secret that change is both inevitable and scary. But it is the foundation upon which I continue to build my house, for better or worse.
+      I've lived through the consequences of bad changes, reveled in the rewards of good ones, and found myself stuck in the dangerous deviousness of
+      insufficient ones—as with the previous designs on this website.
+
+      This website has undergone several changes over the past few years, much like its owner. However, those changes were confined to strict rules and formal expectations that ultimately failed to reflect my core values, beliefs, and self-worth.
+
+      For far too long, the essence of my website has merely been represented and necessitated by the changing circumstances of my survival—I had to do what I had to do. Not anymore. Starting with this new design, I'm returning to inventing on principle. I'm taking this step towards a new frontier to showcase myself for what and who I am.
+
+      Simplicity is why I initially embraced and became *caught in the web* five years ago. The sheer iteration speed of previewing my HTML and CSS code on the blank canvas of a web browser sealed my conviction. I knew then, as I know now, that I'd found a place where I belong.
+
+      So, cheers to simplicity, incremental changes, and the pioneering of a new frontier.
+
+      <h3 data-heading>Colophon</h3>
+
+       This website is Typefaced with system fonts.<br/>
+      Built with <Hyperlink href="https://astro.build">Astro</Hyperlink>, <Hyperlink href="https://mdxjs.com">MDX</Hyperlink>,
+      <Hyperlink href="https://en.wikipedia.org/wiki/CSS">Vanilla CSS</Hyperlink>.<br/>
+      The Code is hosted on <Hyperlink href="https://github.com">GitHub</Hyperlink>.<br/>
+      And the site is deployed with <Hyperlink href="https://vercel.com">Vercel</Hyperlink>.
+
+      Thanks to <Hyperlink href="https://paco.me">Paco Coursey</Hyperlink> and <Hyperlink href="https://toye.me">Toye Fatolu</Hyperlink> for the inspiration.
+
+      Yours,<br/>
+      **Adebiyi Adedotun**
+    </Blog>
+
+  </div>
+</Root>

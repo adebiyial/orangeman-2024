@@ -1,0 +1,69 @@
+---
+import Hyperlink from "./Hyperlink.astro";
+
+console.log(Astro.url.pathname);
+
+const pathname = Astro.url.pathname;
+const pathnames = pathname === "/" ? [""] : pathname.split("/");
+pathnames.splice(0, 1, pathnames.length === 1 ? "" : "Index");
+---
+
+{
+  pathnames.length === 1 ? null : (
+    <ul class="breadcrumbs" data-list>
+      {pathnames.map((path, i) => {
+        return (
+          <li data-list-item>
+            {i === pathnames.length - 1 ? (
+              <span data-subtitle>{path}</span>
+            ) : (
+              <Hyperlink
+                nounderline
+                href={path.toLowerCase() === "index" ? "/" : `/${path}`}
+              >
+                {path}
+              </Hyperlink>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  )
+}
+
+<style>
+  .breadcrumbs {
+    font-weight: 600;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: calc(var(--gap) + 1px);
+    top: 0;
+    padding: var(--gap-2x);
+    position: fixed;
+    background-color: var(--bg);
+    margin-bottom: var(--gap);
+    border-radius: 34px;
+
+    [data-subtitle],
+    a {
+      font-size: 15px;
+    }
+
+    [data-list-item] {
+      position: relative;
+
+      &:not(:first-child)::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        height: 50%;
+        transform: translateX(-6px) rotate(12deg) translateY(-40%);
+        width: 2px;
+        background-color: #ff6d00;
+        top: 50%;
+      }
+    }
+  }
+</style>
