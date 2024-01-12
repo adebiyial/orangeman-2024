@@ -1,9 +1,8 @@
 ---
+import { getPathnames } from "../misc/fns";
 import Hyperlink from "./Hyperlink.astro";
 
-const pathname = Astro.url.pathname;
-const pathnames = pathname === "/" ? [""] : pathname.split("/");
-pathnames.splice(0, 1, pathnames.length === 1 ? "" : "Index");
+const pathnames = getPathnames(Astro.url.pathname);
 ---
 
 {

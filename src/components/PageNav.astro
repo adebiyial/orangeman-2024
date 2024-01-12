@@ -1,5 +1,5 @@
 ---
-import { slugify } from "../misc/fns";
+import { getPathnames, slugify } from "../misc/fns";
 import Hyperlink from "./Hyperlink.astro";
 
 interface Props {
@@ -11,28 +11,55 @@ interface Props {
 }
 
 const { toc } = Astro.props;
+const pathnames = getPathnames(Astro.url.pathname);
+const prevPath = pathnames[pathnames.length - 2];
 ---
 
 <aside data-grid>
-  <span>↓ Table of content</span>
   {
     toc && (
-      <nav>
-        <ul class="toc">
-          <li>
-            <Hyperlink href={Astro.url.pathname} nounderline>
-              <p data-subtitle>Overview</p>
-            </Hyperlink>
-          </li>
-          {toc.map(({ href, title, depth }) => (
-            <li data-depth={depth}>
-              <Hyperlink href={`#${slugify(href || title)}`} nounderline>
-                <p data-subtitle>{title}</p>
+      <>
+        <span>↓ Table of content</span>
+        <nav>
+          <ul class="toc">
+            <li>
+              <Hyperlink href={Astro.url.pathname} nounderline>
+                <p data-subtitle>Overview</p>
               </Hyperlink>
             </li>
-          ))}
-        </ul>
-      </nav>
+            {toc.map(({ href, title, depth }) => (
+              <li data-depth={depth}>
+                <Hyperlink href={`#${slugify(href || title)}`} nounderline>
+                  <p data-subtitle>{title}</p>
+                </Hyperlink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <Hyperlink
+          href={prevPath.toLowerCase() === "index" ? "/" : `/${prevPath}`}
+          nounderline
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-corner-up-left"
+          >
+            <>
+              <polyline points="9 14 4 9 9 4" />
+              <path d="M20 20v-7a4 4 0 0 0-4-4H4" />
+            </>
+          </svg>
+          <span>{prevPath}</span>
+        </Hyperlink>
+      </>
     )
   }
 </aside>
@@ -41,7 +68,6 @@ const { toc } = Astro.props;
   aside {
     position: fixed;
     top: calc(var(--page-top) + 3px);
-    /* white-space: nowrap; */
     /* height: 0; */
     z-index: 1;
     grid-column: 1;
@@ -52,18 +78,28 @@ const { toc } = Astro.props;
     left: var(--body-margin-left);
     width: 300px;
 
-    > span {
+    > span,
+    > a {
       color: var(--light-gray);
       font-weight: 600;
+    }
+
+    > a {
+      display: flex;
+      gap: var(--gap-s);
+      white-space: nowrap;
+      align-items: center;
     }
   }
 
   nav {
     max-height: calc(100vh - var(--page-top));
     overflow: scroll;
-    border-left: 1px solid var(--green-fade);
-    padding-left: var(--gap);
-    margin-left: calc(var(--gap) / 2);
+    border-inline-start: 1px solid var(--green-fade);
+    padding-inline-start: var(--gap);
+    margin-inline-start: calc(var(--gap) / 2);
+    padding-block-end: var(--gap);
+    width: fit-content;
 
     .toc {
       list-style: none;

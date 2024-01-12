@@ -18,3 +18,10 @@ export function groupBy(array: Array<Tarray>, key: keyof Tarray) {
 export function getIdFromUrl(url: string) {
   return new URL(url).hostname.replace(/^www\.|\.com$/g, "");
 }
+
+export function getPathnames(pathname: string) {
+  const pathnames = pathname === "/" ? [""] : pathname.split("/");
+  pathnames.splice(0, 1, pathnames.length === 1 ? "" : "Index");
+
+  return pathnames;
+}
