@@ -1,12 +1,11 @@
 ---
+import github from "../images/socials/github.svg?raw";
+import instagram from "../images/socials/instagram.svg?raw";
+import linkedin from "../images/socials/linkedin.svg?raw";
+import threads from "../images/socials/threads.svg?raw";
+import x from "../images/socials/x.svg?raw";
 import links from "../misc/links";
 import Hyperlink from "./Hyperlink.astro";
-import { Image } from "astro:assets";
-import instagram from "../images/socials/instagram.svg?raw";
-import x from "../images/socials/x.svg?raw";
-import github from "../images/socials/github.svg?raw";
-import threads from "../images/socials/threads.svg?raw";
-import linkedin from "../images/socials/linkedin.svg?raw";
 
 const socialIcons: Record<string, string> = {
   x: x,
@@ -17,12 +16,9 @@ const socialIcons: Record<string, string> = {
 };
 
 const socials = Object.entries(links.socials).filter(([key]) => key !== "mail");
-
-console.log();
 ---
 
 <footer data-grid data-grid-col="3">
-  <!-- <p class="breadcrumbs">{Astro.url.pathname}</p> -->
   <div>
     <p class="quote">The Secret Is to Be Happy.</p>
     <ul data-list data-flex>

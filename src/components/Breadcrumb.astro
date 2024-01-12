@@ -1,8 +1,6 @@
 ---
 import Hyperlink from "./Hyperlink.astro";
 
-console.log(Astro.url.pathname);
-
 const pathname = Astro.url.pathname;
 const pathnames = pathname === "/" ? [""] : pathname.split("/");
 pathnames.splice(0, 1, pathnames.length === 1 ? "" : "Index");
