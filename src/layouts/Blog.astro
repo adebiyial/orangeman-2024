@@ -5,8 +5,6 @@ import PageNav from "../components/PageNav.astro";
 
 const posts = await Astro.glob("../pages/weblog/*.mdx");
 const currentPost = posts.filter((p) => {
-  console.log({ pUrl: p.url, aUrl: Astro.url.pathname.replace(".html", "") });
-
   return p.url === Astro.url.pathname.replace(".html", "");
 })[0];
 const headings = currentPost.getHeadings();
