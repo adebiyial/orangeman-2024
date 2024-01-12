@@ -4,11 +4,10 @@ import Root from "./Root.astro";
 import PageNav from "../components/PageNav.astro";
 
 const posts = await Astro.glob("../pages/weblog/*.mdx");
-
-const currentPost = posts.filter((p) => p.url === Astro.url.pathname)[0];
+const currentPost = posts.filter((p) => {
+  return p.url?.replaceAll("/", "") === Astro.url.pathname.replaceAll("/", "");
+})[0];
 const headings = currentPost.getHeadings();
-
-console.log({ headings });
 
 const {
   frontmatter: { title, date },
