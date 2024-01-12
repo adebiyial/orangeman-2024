@@ -22,6 +22,7 @@ export function getIdFromUrl(url: string) {
 export function getPathnames(pathname: string) {
   const pathnames = pathname === "/" ? [""] : pathname.split("/");
   pathnames.splice(0, 1, pathnames.length === 1 ? "" : "Index");
+  console.log({ pathnames });
 
   return pathnames;
 }
