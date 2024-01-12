@@ -37,7 +37,7 @@ const { title } = Astro.props;
     --font-body: "Bricolage Grotesque 24pt", var(--font-fallback);
     --font-sans: var(--font-body);
     /* font-serif */
-    --font-mono: Menlo, Monaco, Lucida Console, Liberation Mono,
+    --font-mono: "IBM Plex Mono", Menlo, Monaco, Lucida Console, Liberation Mono,
       DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
     --text: 1rem;
     --type: var(--text) / var(--leading) var(--font-body);
@@ -74,8 +74,8 @@ const { title } = Astro.props;
   @media (prefers-color-scheme: dark) {
     :root {
       color-scheme: dark;
-      --bg: #0b0f0b;
       --bg: #101010;
+      --bg: #0b0f0b;
       --fg: #d7d7db;
       --green-fade: rgba(30, 55, 38, 0.6);
       --default-fg: #ffffff;
@@ -169,6 +169,7 @@ const { title } = Astro.props;
   h4,
   h5 {
     margin-block: 0;
+    scroll-margin-top: var(--page-top);
   }
   /* Defaults */
   [data-grid] {

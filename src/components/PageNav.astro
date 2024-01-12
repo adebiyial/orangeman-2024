@@ -6,6 +6,7 @@ interface Props {
   toc?: Array<{
     title: string;
     href?: string;
+    depth?: number;
   }>;
 }
 
@@ -23,8 +24,8 @@ const { toc } = Astro.props;
               <p data-subtitle>Overview</p>
             </Hyperlink>
           </li>
-          {toc.map(({ href, title }) => (
-            <li>
+          {toc.map(({ href, title, depth }) => (
+            <li data-depth={depth}>
               <Hyperlink href={`#${slugify(href || title)}`} nounderline>
                 <p data-subtitle>{title}</p>
               </Hyperlink>
@@ -38,13 +39,18 @@ const { toc } = Astro.props;
 
 <style>
   aside {
-    position: sticky;
+    position: fixed;
     top: calc(var(--page-top) + 3px);
-    white-space: nowrap;
+    /* white-space: nowrap; */
+    /* height: 0; */
     z-index: 1;
     grid-column: 1;
-    height: 0;
     gap: var(--gap-3x);
+
+    position: fixed;
+    /* right: 12rem;x */
+    left: var(--body-margin-left);
+    width: 300px;
 
     > span {
       color: var(--light-gray);
@@ -53,8 +59,11 @@ const { toc } = Astro.props;
   }
 
   nav {
-    height: 50vh;
+    max-height: calc(100vh - var(--page-top));
     overflow: scroll;
+    border-left: 1px solid var(--green-fade);
+    padding-left: var(--gap);
+    margin-left: calc(var(--gap) / 2);
 
     .toc {
       list-style: none;
@@ -72,6 +81,10 @@ const { toc } = Astro.props;
       [data-subtitle] {
         padding: var(--gap-s) 0;
       }
+    }
+
+    [data-depth="3"] {
+      padding-inline-start: var(--gap-2x);
     }
   }
 </style>

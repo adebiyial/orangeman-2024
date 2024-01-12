@@ -1,7 +1,7 @@
 [
   {
     "title": "Yet Another Redesign",
-    "href": "/yet-another-redesign",
+    "href": "yet-another-redesign",
     "publicationDate": "September 22, 2023"
   },
   {
@@ -37,7 +37,7 @@
   {
     "title": "React Context API: A Deep Dive with Examples",
     "publisher": "LogRocket",
-    "href": "https://blog.logrocket.com/react-context-api-deep-dive-example",
+    "href": "react-context-api-deep-dive-examples",
     "publicationDate": "March 24, 2023"
   },
   {

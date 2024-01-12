@@ -45,7 +45,7 @@ const toc = groupedPosts.map(([key]) => ({
                 return (
                   <li>
                     <Hyperlink
-                      href={`${Astro.url.pathname}${href}`}
+                      href={`${Astro.url.pathname}/${href}`}
                       nounderline
                     >
                       {title}

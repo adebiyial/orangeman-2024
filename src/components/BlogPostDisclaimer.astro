@@ -1,0 +1,26 @@
+---
+import Hyperlink from "./Hyperlink.astro";
+
+interface Props {
+  title: string;
+  publishedOn: string;
+  canonicalUrl: string;
+}
+
+const { title, publishedOn, canonicalUrl } = Astro.props;
+---
+
+<div>
+  <span role="img">👋</span>
+  <Hyperlink href={canonicalUrl}>{title}</Hyperlink> was originally published on
+  {publishedOn}.
+</div>
+
+<style>
+  div {
+    border-left: 4px solid #ff6d00;
+    padding-inline-start: var(--gap);
+    padding-block-end: var(--gap);
+    margin-block-end: var(--gap-4x);
+  }
+</style>

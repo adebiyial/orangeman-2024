@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import customCodeTheme from "./src/misc/code-theme.json";
 
 import mdx from "@astrojs/mdx";
 
@@ -6,4 +7,7 @@ import mdx from "@astrojs/mdx";
 export default defineConfig({
   trailingSlash: "ignore",
   integrations: [mdx()],
+  markdown: {
+    shikiConfig: { theme: customCodeTheme },
+  },
 });
