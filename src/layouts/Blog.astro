@@ -8,6 +8,8 @@ const posts = await Astro.glob("../pages/weblog/*.mdx");
 const currentPost = posts.filter((p) => p.url === Astro.url.pathname)[0];
 const headings = currentPost.getHeadings();
 
+console.log({ headings });
+
 const {
   frontmatter: { title, date },
 } = Astro.props;
