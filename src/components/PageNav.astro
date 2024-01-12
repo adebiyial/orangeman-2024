@@ -68,15 +68,10 @@ const prevPath = pathnames[pathnames.length - 2];
   aside {
     position: fixed;
     top: calc(var(--page-top) + 3px);
-    /* height: 0; */
-    z-index: 1;
-    grid-column: 1;
-    gap: var(--gap-3x);
-
-    position: fixed;
-    /* right: 12rem;x */
     left: var(--body-margin-left);
-    width: 300px;
+    z-index: 1;
+    gap: var(--gap-3x);
+    /* width: 300px; */
 
     > span,
     > a {
@@ -93,7 +88,7 @@ const prevPath = pathnames[pathnames.length - 2];
   }
 
   nav {
-    max-height: calc(100vh - var(--page-top));
+    max-height: calc(100vh - var(--page-top) * 2);
     overflow: scroll;
     border-inline-start: 1px solid var(--green-fade);
     padding-inline-start: var(--gap);
