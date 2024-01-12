@@ -30,9 +30,9 @@ const toc = groupedPublications.map(([key]) => ({
         groupedPublications.map(([key, value]) => (
           <>
             <li data-list-item>
-              <h4 class="title" id={slugify(key)}>
+              <h3 class="title" id={slugify(key)}>
                 {key}
-              </h4>
+              </h3>
               <ul data-list>
                 {value.map(({ title, href, publicationDate }) => {
                   return (

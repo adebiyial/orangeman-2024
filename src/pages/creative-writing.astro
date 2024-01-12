@@ -1,10 +1,14 @@
 ---
+import { group, sort } from "d3-array";
 import urlMetadata from "url-metadata";
-import Card from "../components/Card.astro";
 import Hyperlink from "../components/Hyperlink.astro";
 import PageHeader from "../components/PageHeader.astro";
 import PageNav from "../components/PageNav.astro";
 import Root from "../layouts/Root.astro";
+import { slugify } from "../misc/fns";
+import Card from "../components/Card.astro";
+
+const title = "Creative writing";
 
 const urls = [
   "https://www.theseptum.com/topics/fiction/leaving-home",
@@ -13,6 +17,7 @@ const urls = [
   "https://www.theseptum.com/topics/history/my-game-boy-advance-was-the-perfect-tragedy-for-a-healthy-life",
   "https://www.theseptum.com/topics/history/hindsight-and-the-many-nights-of-resurrection",
   "https://www.theseptum.com/topics/essay/i-can-never-fall-asleep-when-it-matters",
+  "https://www.theseptum.com/topics/history/welcome-to-the-septum",
 ];
 
 async function fetchArticles() {
@@ -24,39 +29,67 @@ async function fetchArticles() {
       });
     const resArray = await Promise.all(urls.map((url) => metadata(url)));
 
-    const articles: Array<Record<string, string>> = resArray.map((res) => ({
-      title: String(res["og:title"] || res.title),
-      description: String(res["og:description"] || res.description),
-      imageUrl: String(res["og:image"]),
-      url: String(res["og:url"] || res["canonical"] || res["url"]),
-    }));
+    const articles: Array<Record<string, string>> = resArray.map((res, i) => {
+      return {
+        title: String(res["og:title"] || res.title),
+        description: String(res["og:description"] || res.description),
+        imageUrl: String(res["og:image"]),
+        url: String(res["og:url"] || res["canonical"] || res["url"]),
+        date: String(res["article:published_time"]),
+      };
+    });
 
     return articles;
   } catch (error) {
-    throw Error("Something went wrong...");
+    throw new Error("Error fetching articles on page 'creative-writing'...");
   }
 }
 
 const articles = await fetchArticles();
-const title = "Creative writing";
+const sortedArticles = sort(articles, (d) => -new Date(d.date));
+const groupedArticles = Array.from(
+  group(sortedArticles, (d) => new Date(d.date).getFullYear())
+);
+const toc = groupedArticles.map(([key]) => ({
+  title: String(key),
+}));
 ---
 
 <Root title={title}>
-  <div data-grid data-grid-col="2" data-layout-center>
-    <PageNav />
-    <PageHeader heading={title} subheading={`# ${articles.length}`} />
-
+  <div data-grid data-layout-center>
+    <PageNav toc={toc} />
+    <PageHeader heading={title} subheading={sortedArticles.length} symbol="#" />
     <ul data-grid data-list>
       {
-        articles.map((item) => (
-          <li data-list-item>
-            <Hyperlink href={item.url} nounderline target="_blank">
-              <Card
-                title={item.title}
-                subtitle={item.description}
-                imageUrl={item.imageUrl}
-              />
-            </Hyperlink>
+        groupedArticles.map(([key, value]) => (
+          <li data-list-item data-grid>
+            <h3 class="title" id={slugify(key)}>
+              {key}
+            </h3>
+            <ul data-list>
+              {value.map(({ title, url, date, imageUrl, description }) => {
+                return (
+                  <li>
+                    <Hyperlink
+                      href={`${Astro.url.pathname}/${url}`}
+                      nounderline
+                    >
+                      <Card
+                        title={title}
+                        subtitle={description}
+                        imageUrl={imageUrl}
+                        date={new Date(date).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      />
+                    </Hyperlink>
+                  </li>
+                );
+              })}
+            </ul>
+            <PageHeader heading="" subheading={value.length} symbol="#" />
           </li>
         ))
       }
@@ -66,12 +99,54 @@ const title = "Creative writing";
 
 <style>
   [data-layout-center] {
-    column-gap: var(--gap-4x);
-    --content-width: 1fr;
-  }
+    > [data-list] {
+      margin-block: var(--gap-s);
+      gap: var(--gap-2x);
+    }
 
-  [data-list] {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--gap-3x) var(--gap-2x);
+    [data-list-item] {
+      margin-block-end: var(--gap-3x);
+
+      header {
+        padding-block: 0 var(--gap);
+        margin: 0 0 0 auto;
+        border-bottom: 1px solid var(--green-fade);
+        width: fit-content;
+        border-top: transparent;
+        position: relative;
+        top: -2px;
+        background-color: var(--bg);
+
+        &::after {
+          content: "";
+          position: absolute;
+          height: 100%;
+          width: var(--gap);
+          left: calc(-1 * var(--gap));
+          background: inherit;
+        }
+      }
+
+      .title {
+        margin-block-end: var(--gap-2x);
+        width: fit-content;
+        scroll-margin-top: var(--page-top);
+      }
+
+      [data-list] {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: var(--gap-3x);
+      }
+
+      li a {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--gap) 0;
+        border-block-end: 1px solid var(--green-fade);
+        height: 100%;
+        align-items: start;
+      }
+    }
   }
 </style>

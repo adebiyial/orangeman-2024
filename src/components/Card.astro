@@ -7,14 +7,22 @@ interface Props {
   title: string;
   subtitle: string;
   imageUrl: string;
+  date?: string;
   imageHeight?: number;
 }
 
-const { title, subtitle, imageUrl, imageHeight } = Astro.props;
+const { title, subtitle, imageUrl, imageHeight, date } = Astro.props;
 ---
 
 <div data-card>
   <Image src={imageUrl} alt={title} height={imageHeight} />
+  {
+    date && (
+      <time datetime={date} data-subtitle>
+        {date}
+      </time>
+    )
+  }
   <CardTitle title={title} />
   <CardSubtitle subtitle={subtitle} />
 </div>

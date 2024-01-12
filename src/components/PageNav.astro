@@ -23,7 +23,7 @@ const prevPath = pathnames[pathnames.length - 2];
         <nav>
           <ul class="toc">
             <li>
-              <Hyperlink href={Astro.url.pathname} nounderline>
+              <Hyperlink href={`${Astro.url.pathname}#`} nounderline>
                 <p data-subtitle>Overview</p>
               </Hyperlink>
             </li>
@@ -36,32 +36,32 @@ const prevPath = pathnames[pathnames.length - 2];
             ))}
           </ul>
         </nav>
-        <Hyperlink
-          href={prevPath.toLowerCase() === "index" ? "/" : `/${prevPath}`}
-          nounderline
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-corner-up-left"
-          >
-            <>
-              <polyline points="9 14 4 9 9 4" />
-              <path d="M20 20v-7a4 4 0 0 0-4-4H4" />
-            </>
-          </svg>
-          <span>{prevPath}</span>
-        </Hyperlink>
       </>
     )
   }
+  <Hyperlink
+    href={prevPath.toLowerCase() === "index" ? "/" : `/${prevPath}`}
+    nounderline
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-corner-up-left"
+    >
+      <>
+        <polyline points="9 14 4 9 9 4"></polyline>
+        <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+      </>
+    </svg>
+    <span>{prevPath}</span>
+  </Hyperlink>
 </aside>
 
 <style>

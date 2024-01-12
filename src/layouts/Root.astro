@@ -2,6 +2,7 @@
 import Breadcrumb from "../components/Breadcrumb.astro";
 import PageFooter from "../components/PageFooter.astro";
 import PostHog from "../components/posthog.astro";
+import { getPathnames } from "../misc/fns";
 
 interface Props {
   title: string;
@@ -11,6 +12,8 @@ const { title } = Astro.props;
 const projectAPIKey = "phc_1Q1HMBaLmmJdiyWJ0gVYAoklVOgZanJyOydTgllhCrJ";
 const cookie = Astro.cookies.get(`ph_${projectAPIKey}_posthog`);
 let distinctId = cookie?.json().distinct_id;
+
+const pathnames = getPathnames(Astro.url.pathname);
 ---
 
 <!doctype html>
@@ -28,7 +31,7 @@ let distinctId = cookie?.json().distinct_id;
     <p style="display:none" class="did">{distinctId}</p>
 
     <div id="canvas">
-      <Breadcrumb />
+      {pathnames.length > 1 && <Breadcrumb />}
       <slot />
       <PageFooter />
     </div>
