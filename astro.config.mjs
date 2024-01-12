@@ -10,4 +10,5 @@ export default defineConfig({
   markdown: {
     shikiConfig: { theme: customCodeTheme },
   },
+  output: "hybrid",
 });

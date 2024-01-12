@@ -47,5 +47,14 @@
   })(document, window.posthog || []);
   posthog.init("phc_1Q1HMBaLmmJdiyWJ0gVYAoklVOgZanJyOydTgllhCrJ", {
     api_host: "https://app.posthog.com",
+    loaded: function (posthog) {
+      const distinctId = document.querySelector(".did").innerHTML;
+      if (
+        posthog.get_distinct_id() &&
+        posthog.get_distinct_id() !== distinctId
+      ) {
+        posthog.identify(distinctId);
+      }
+    },
   });
 </script>

@@ -8,6 +8,9 @@ interface Props {
 }
 
 const { title } = Astro.props;
+const projectAPIKey = "phc_1Q1HMBaLmmJdiyWJ0gVYAoklVOgZanJyOydTgllhCrJ";
+const cookie = Astro.cookies.get(`ph_${projectAPIKey}_posthog`);
+let distinctId = cookie?.json().distinct_id;
 ---
 
 <!doctype html>
@@ -22,6 +25,8 @@ const { title } = Astro.props;
     <PostHog />
   </head>
   <body>
+    <p style="display:none" class="did">{distinctId}</p>
+
     <div id="canvas">
       <Breadcrumb />
       <slot />
