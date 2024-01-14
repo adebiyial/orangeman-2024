@@ -1,0 +1,204 @@
+---
+import { sort } from "d3-array";
+import Card from "../../components/Card.astro";
+import Hyperlink from "../../components/Hyperlink.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import Root from "../../layouts/Root.astro";
+import {
+  concatAuthors,
+  fetchBooksByReadingStateAndProfile,
+  formatDate,
+  getMetatags,
+  slugify,
+} from "../../misc/fns";
+import { Image } from "astro:assets";
+import CardTitle from "../../components/CardTitle.astro";
+
+const title = "Literature";
+const imageHeight = 25;
+const pages = [
+  {
+    title: "Articles",
+    subtitle:
+      "Since 2020—when I started recording—I've read almost 800 articles.",
+  },
+  {
+    title: "Books",
+    subtitle:
+      "History, politics, fiction, memoirs… my library has grown to over 70 books.",
+  },
+  {
+    title: "Creative Writing",
+    subtitle: "Everything I write for The Septum",
+  },
+];
+
+const urls = [
+  "https://www.newyorker.com/magazine/2023/11/06/israel-gaza-war-hamas",
+  "https://www.newyorker.com/magazine/2023/01/23/the-corrupt-world-behind-the-murdaugh-murders",
+  "https://www.washingtonpost.com/graphics/2017/world/national-security/obama-putin-election-hacking",
+  "https://www.newyorker.com/magazine/2022/06/27/how-to-buy-a-new-mattress-without-a-phd-in-chemistry",
+  "https://www.nytimes.com/2023/12/29/business/media/media-openai-chatgpt.html",
+  "https://www.theatlantic.com/family/archive/2022/12/breakup-heartbreak-moving-on-shorten-pain/672391",
+];
+
+const latestArticles = sort(await getMetatags(urls), (d) => -new Date(d.date));
+const sortedBooks = sort(
+  await fetchBooksByReadingStateAndProfile(),
+  (d) => d.title
+);
+---
+
+<Root title={title}>
+  <div data-layout-center>
+    <article data-prose>
+      <PageHeader heading={title} subheading="" symbol="#" />
+      <ul data-list>
+        {
+          pages.map(({ title, subtitle }) => (
+            <li data-list-item>
+              <Hyperlink
+                href={`${Astro.url.pathname}/${slugify(title)}`}
+                nounderline
+              >
+                <Card
+                  {...{
+                    title,
+                    subtitle,
+                    imageUrl: `https://avatar.vercel.sh/${slugify(
+                      title
+                    )}?size=${imageHeight}`,
+                    imageHeight,
+                  }}
+                />
+              </Hyperlink>
+            </li>
+          ))
+        }
+      </ul>
+      <hr />
+      <section>
+        <SectionHeader
+          heading="Books Recently Read"
+          subheading="From the archives."
+        />
+
+        <ul data-masonry data-list>
+          {
+            sortedBooks.map(({ title, cover, authors }) => {
+              return (
+                <li data-list-item class="book">
+                  <div class="cover-wrap">
+                    <Image
+                      src={cover}
+                      class="cover"
+                      alt={title}
+                      loading="eager"
+                      decoding="async"
+                      width={128}
+                      height={171}
+                    />
+                  </div>
+                  <div class="book-info">
+                    <CardTitle title={title} />
+                    {authors.length >= 1 ? (
+                      <p class="author" data-subtitle>
+                        By {concatAuthors(authors.map((author) => author.name))}
+                      </p>
+                    ) : null}
+                  </div>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </section>
+      <hr />
+
+      <section>
+        <SectionHeader
+          heading="Articles Recently Read"
+          subheading="From the archives."
+        />
+        <ul data-masonry data-list>
+          {
+            latestArticles.map(
+              ({ title, url, date, source, imageUrl, description }) => (
+                <li data-list-item>
+                  <Hyperlink href={url} nounderline target="_blank">
+                    <Card
+                      title={title}
+                      subtitle={description}
+                      imageUrl={imageUrl}
+                      date={formatDate(date)}
+                      source={source}
+                    />
+                  </Hyperlink>
+                </li>
+              )
+            )
+          }
+        </ul>
+      </section>
+    </article>
+  </div>
+</Root>
+
+<style>
+  [data-layout-center] {
+  }
+
+  [data-prose] {
+    > *:not(header) {
+      margin-block: 0 var(--gap-6x);
+    }
+
+    > [data-list] {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--gap-4x);
+
+      [data-list-item] {
+        display: inherit;
+      }
+    }
+  }
+
+  [data-masonry][data-list] {
+    columns: 300px;
+    column-gap: var(--gap);
+
+    [data-list-item] {
+      break-inside: avoid-column;
+      margin: 0;
+      margin-block-end: var(--gap);
+      border: 1px solid var(--green-fade);
+      padding: var(--gap);
+      border-radius: 6px;
+    }
+  }
+
+  .book {
+    display: grid;
+    text-align: center;
+    gap: var(--gap);
+    padding: var(--gap-3x) var(--gap);
+    margin-inline-start: -1px;
+    margin-block-start: -1px;
+    border: 1px solid var(--green-fade);
+    border-radius: 6px;
+
+    .book-info {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+      width: fit-content;
+      margin: 0 auto;
+    }
+
+    .cover {
+      object-fit: contain;
+    }
+  }
+</style>

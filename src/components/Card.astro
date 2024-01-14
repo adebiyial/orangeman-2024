@@ -9,18 +9,24 @@ interface Props {
   imageUrl: string;
   date?: string;
   imageHeight?: number;
+  source?: string;
 }
 
-const { title, subtitle, imageUrl, imageHeight, date } = Astro.props;
+const { title, subtitle, imageUrl, imageHeight, date, source } = Astro.props;
 ---
 
 <div data-card>
   <Image src={imageUrl} alt={title} height={imageHeight} />
   {
-    date && (
-      <time datetime={date} data-subtitle>
-        {date}
-      </time>
+    source && date && (
+      <div class="meta">
+        {date && (
+          <time datetime={date} data-subtitle>
+            {date}
+          </time>
+        )}
+        {source && <span data-subtitle>{source}</span>}
+      </div>
     )
   }
   <CardTitle title={title} />
@@ -31,6 +37,12 @@ const { title, subtitle, imageUrl, imageHeight, date } = Astro.props;
   [data-card]:hover {
     :where(picture, image) {
       filter: grayscale();
+      transition: var(--transition-fast);
     }
+  }
+
+  .meta {
+    display: flex;
+    justify-content: space-between;
   }
 </style>

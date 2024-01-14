@@ -2,25 +2,25 @@
 import { group, sort } from "d3-array";
 import Hyperlink from "../../components/Hyperlink.astro";
 import PageHeader from "../../components/PageHeader.astro";
-import PageNav from "../../components/PageNav.astro";
 import Root from "../../layouts/Root.astro";
-import rawPosts from "../../misc/posts.json";
-import { slugify } from "../../misc/fns";
+import { formatDate, slugify } from "../../misc/fns";
+import type { BlogPostFrontmatter } from "../../misc/types";
 
 const title = "Weblog";
 
-const sortedPosts = sort(rawPosts, (d) => -new Date(d.publicationDate));
-const groupedPosts = Array.from(
-  group(sortedPosts, (d) => new Date(d.publicationDate).getFullYear())
-);
-const toc = groupedPosts.map(([key]) => ({
-  title: String(key),
+const fetchedPosts = await Astro.glob<BlogPostFrontmatter>("./*.mdx");
+const posts = fetchedPosts.map((p) => ({
+  ...p.frontmatter,
+  url: String(p.url),
 }));
+const sortedPosts = sort(posts, (d) => -new Date(d.date));
+const groupedPosts = Array.from(
+  group(sortedPosts, (d) => new Date(d.date).getFullYear())
+);
 ---
 
 <Root title={title}>
   <div data-grid data-grid-col="3" data-layout-center>
-    <PageNav toc={toc} />
     <PageHeader heading={title} subheading={sortedPosts.length} symbol="#" />
     <ul data-list data-grid>
       {
@@ -30,24 +30,13 @@ const toc = groupedPosts.map(([key]) => ({
               {key}
             </h3>
             <ul data-list>
-              {value.map(({ title, href, publicationDate }) => {
-                const date = new Date(publicationDate).toLocaleDateString(
-                  "en-US",
-                  {
-                    month: "long",
-                    day: "numeric",
-                  }
-                );
-
+              {value.map(({ title, url, date }) => {
                 return (
                   <li>
-                    <Hyperlink
-                      href={`${Astro.url.pathname}/${href}`}
-                      nounderline
-                    >
+                    <Hyperlink href={url} nounderline>
                       {title}
-                      <time datetime={publicationDate} data-subtitle>
-                        {date}
+                      <time datetime={date} data-subtitle>
+                        {formatDate(date)}
                       </time>
                     </Hyperlink>
                   </li>
@@ -64,23 +53,15 @@ const toc = groupedPosts.map(([key]) => ({
 
 <style>
   [data-layout-center] {
-    /* column-gap: var(--gap-4x); */
-
     > [data-list] {
       margin-block: var(--gap-s);
       gap: var(--gap-2x);
     }
 
     [data-list-item] {
-      /* grid-template-columns: auto 1fr;
-      column-gap: var(--gap-4x);
-      align-items: start;
-      justify-content: end; */
-
       header {
         padding-block: 0 var(--gap);
         margin: 0 0 0 auto;
-        /* grid-column: 2; */
         border-bottom: 1px solid var(--green-fade);
         width: fit-content;
         border-top: transparent;
@@ -99,12 +80,6 @@ const toc = groupedPosts.map(([key]) => ({
       }
 
       .title {
-        /* font-variant: tabular-nums;
-        padding-block-start: var(--gap);
-        scroll-margin-top: var(--page-top);
-        position: sticky;
-        top: calc(var(--page-top) + 3px); */
-
         margin-block-end: var(--gap-2x);
         width: fit-content;
         scroll-margin-top: var(--page-top);

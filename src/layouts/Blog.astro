@@ -1,9 +1,11 @@
 ---
 import PageHeader from "../components/PageHeader.astro";
-import Root from "./Root.astro";
 import PageNav from "../components/PageNav.astro";
+import type { BlogPostFrontmatter } from "../misc/types";
+import Root from "./Root.astro";
 
-const posts = await Astro.glob("../pages/weblog/*.mdx");
+const posts = await Astro.glob<BlogPostFrontmatter>("../pages/weblog/*.mdx");
+
 const isBlogPage = posts.some(
   (p) => p.url?.replaceAll("/", "") === Astro.url.pathname.replaceAll("/", "")
 );

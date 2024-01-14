@@ -1,12 +1,10 @@
 ---
 import { group, sort } from "d3-array";
-import urlMetadata from "url-metadata";
+import Card from "../components/Card.astro";
 import Hyperlink from "../components/Hyperlink.astro";
 import PageHeader from "../components/PageHeader.astro";
-import PageNav from "../components/PageNav.astro";
 import Root from "../layouts/Root.astro";
-import { slugify } from "../misc/fns";
-import Card from "../components/Card.astro";
+import { formatDate, getMetatags, slugify } from "../misc/fns";
 
 const title = "Creative writing";
 
@@ -20,45 +18,16 @@ const urls = [
   "https://www.theseptum.com/topics/history/welcome-to-the-septum",
 ];
 
-async function fetchArticles() {
-  try {
-    const metadata = (url: string) =>
-      urlMetadata(url, {
-        mode: "cors",
-        includeResponseBody: false,
-      });
-    const resArray = await Promise.all(urls.map((url) => metadata(url)));
-
-    const articles: Array<Record<string, string>> = resArray.map((res, i) => {
-      return {
-        title: String(res["og:title"] || res.title),
-        description: String(res["og:description"] || res.description),
-        imageUrl: String(res["og:image"]),
-        url: String(res["og:url"] || res["canonical"] || res["url"]),
-        date: String(res["article:published_time"]),
-      };
-    });
-
-    return articles;
-  } catch (error) {
-    throw new Error("Error fetching articles on page 'creative-writing'...");
-  }
-}
-
-const articles = await fetchArticles();
-const sortedArticles = sort(articles, (d) => -new Date(d.date));
+const sortedArticles = sort(await getMetatags(urls), (d) => -new Date(d.date));
 const groupedArticles = Array.from(
   group(sortedArticles, (d) => new Date(d.date).getFullYear())
 );
-const toc = groupedArticles.map(([key]) => ({
-  title: String(key),
-}));
 ---
 
 <Root title={title}>
-  <div data-grid data-layout-center>
-    <PageNav toc={toc} />
+  <div data-layout-center>
     <PageHeader heading={title} subheading={sortedArticles.length} symbol="#" />
+
     <ul data-grid data-list>
       {
         groupedArticles.map(([key, value]) => (
@@ -78,11 +47,7 @@ const toc = groupedArticles.map(([key]) => ({
                         title={title}
                         subtitle={description}
                         imageUrl={imageUrl}
-                        date={new Date(date).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
+                        date={formatDate(date)}
                       />
                     </Hyperlink>
                   </li>

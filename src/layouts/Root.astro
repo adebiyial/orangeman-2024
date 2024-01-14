@@ -33,7 +33,7 @@ const pathnames = getPathnames(Astro.url.pathname);
     <div id="canvas">
       {pathnames.length > 1 && <Breadcrumb />}
       <slot />
-      <PageFooter />
+      <!-- <PageFooter /> -->
     </div>
     <style is:global>
       :root {
@@ -89,6 +89,7 @@ const pathnames = getPathnames(Astro.url.pathname);
           --green-fade: rgba(30, 55, 38, 0.6);
           --default-fg: #ffffff;
           --light-gray: #9c9c9c;
+          --orange: #ff6d00;
           /* text-transform: uppercase; */
         }
       }
@@ -122,10 +123,10 @@ const pathnames = getPathnames(Astro.url.pathname);
         padding-left: var(--body-margin-left);
         padding-right: var(--body-margin-right);
         padding-bottom: var(--safe-area-inset-bottom);
-        display: grid;
+        /* display: grid;
         grid-template-rows: 1fr var(--footer-height);
         align-items: start;
-        min-height: 100vh;
+        min-height: 100vh; */
       }
       b,
       strong {
@@ -233,7 +234,7 @@ const pathnames = getPathnames(Astro.url.pathname);
       }
 
       [data-comment] {
-        color: #ff6d00;
+        color: var(--orange);
       }
 
       [data-card] {

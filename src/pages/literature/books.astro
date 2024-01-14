@@ -1,0 +1,86 @@
+---
+import { Image } from "astro:assets";
+import { sort } from "d3-array";
+import CardTitle from "../../components/CardTitle.astro";
+import Root from "../../layouts/Root.astro";
+import { concatAuthors, fetchBooks } from "../../misc/fns";
+
+const title = "Books";
+
+const sortedBooks = sort(await fetchBooks(), (d) => d.title);
+---
+
+<Root title={title}>
+  <ul data-masonry data-list>
+    {
+      sortedBooks.map(({ title, cover, authors }) => {
+        return (
+          <li class="book">
+            <div class="cover-wrap">
+              <Image
+                src={cover}
+                class="cover"
+                alt={title}
+                loading="eager"
+                decoding="async"
+                width={128}
+                height={171}
+              />
+            </div>
+            <div class="book-info">
+              <CardTitle title={title} />
+              {authors.length >= 1 ? (
+                <p class="author" data-subtitle>
+                  By {concatAuthors(authors.map((author) => author.name))}
+                </p>
+              ) : null}
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
+</Root>
+
+<style>
+  [data-grid] {
+    --size: 200px;
+    margin-block-start: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(var(--size), 1fr));
+    padding-block: 0;
+  }
+
+  [data-masonry] {
+    columns: 200px;
+    column-gap: var(--gap);
+
+    .book {
+      break-inside: avoid-column;
+      margin: 0;
+      margin-block-end: var(--gap);
+    }
+  }
+
+  .book {
+    display: grid;
+    text-align: center;
+    gap: var(--gap);
+    padding: var(--gap-3x) var(--gap);
+    margin-inline-start: -1px;
+    margin-block-start: -1px;
+    border: 1px solid var(--green-fade);
+    border-radius: 6px;
+
+    .book-info {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+      width: fit-content;
+      margin: 0 auto;
+    }
+
+    .cover {
+      object-fit: contain;
+    }
+  }
+</style>
