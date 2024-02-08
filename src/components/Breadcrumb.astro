@@ -7,7 +7,7 @@ const pathnames = getPathnames(Astro.url.pathname);
 
 <ul class="breadcrumbs" data-list>
   {
-    pathnames.slice(0, pathnames.length - 1).map((path, i) => {
+    pathnames.slice(0, pathnames.length - 1).map((path) => {
       const isIndexPage = path.toLowerCase() === "index";
       return (
         <li data-list-item>

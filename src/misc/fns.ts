@@ -1,6 +1,10 @@
 import urlMetadata from "url-metadata";
 import type { BooksJsonRes, IMyBooks } from "./types";
 
+const token = import.meta.env.PUBLIC_LITERAL_ACCESS_TOKEN;
+const profileId = import.meta.env.PUBLIC_LITERAL_PROFILE_ID;
+const endpoint = "https://literal.club/graphql";
+
 export const slugify = (text: string | number) =>
   String(text)
     .toLowerCase()
@@ -40,7 +44,7 @@ export async function getMetatags(urls: Array<string>) {
       });
     const resArray = await Promise.all(urls.map((url) => metadata(url)));
 
-    const articles: Array<Record<string, string>> = resArray.map((res, i) => {
+    const articles: Array<Record<string, string>> = resArray.map((res) => {
       return {
         title: String(res["og:title"] || res.title),
         description: String(res["og:description"] || res.description),
@@ -70,8 +74,6 @@ export function formatDate(date: string, options?: Intl.DateTimeFormatOptions) {
 }
 
 export async function fetchBooks(): Promise<Array<IMyBooks>> {
-  const token = import.meta.env.PUBLIC_LITERAL_ACCESS_TOKEN;
-  const endpoint = "https://literal.club/graphql/";
   const options = {
     method: "POST",
     headers: {
@@ -104,10 +106,6 @@ export async function fetchBooks(): Promise<Array<IMyBooks>> {
 export async function fetchBooksByReadingStateAndProfile(): Promise<
   Array<IMyBooks>
 > {
-  const token = import.meta.env.PUBLIC_LITERAL_ACCESS_TOKEN;
-  const profileId = import.meta.env.PUBLIC_LITERAL_PROFILE_ID;
-
-  const endpoint = "https://literal.club/graphql/";
   const options = {
     method: "POST",
     headers: {
