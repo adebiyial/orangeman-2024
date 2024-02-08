@@ -22,10 +22,10 @@ const groupedPosts = Array.from(
 <Root title={title}>
   <div data-grid data-grid-col="3" data-layout-center>
     <PageHeader heading={title} subheading={sortedPosts.length} symbol="#" />
-    <ul data-list data-grid>
+    <ul data-list>
       {
         groupedPosts.slice(1).map(([key, value]) => (
-          <li data-list-item data-grid>
+          <li data-list-item>
             <h3 class="title" id={slugify(key)}>
               {key}
             </h3>
@@ -55,10 +55,11 @@ const groupedPosts = Array.from(
   [data-layout-center] {
     > [data-list] {
       margin-block: var(--gap-s);
-      gap: var(--gap-2x);
     }
 
     [data-list-item] {
+      margin-block-end: var(--gap-3x);
+
       header {
         padding-block: 0 var(--gap);
         margin: 0 0 0 auto;
@@ -90,9 +91,13 @@ const groupedPosts = Array.from(
         justify-content: space-between;
         padding: var(--gap) 0;
         border-block-end: 1px solid var(--green-fade);
+        gap: var(--gap);
       }
 
-      li a {
+      @media screen and (max-width: 626px) {
+        time {
+          display: none;
+        }
       }
     }
   }

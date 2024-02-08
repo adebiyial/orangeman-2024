@@ -118,6 +118,7 @@ const pathnames = getPathnames(Astro.url.pathname);
         background: var(--bg);
         color: var(--fg);
         margin: 0;
+        line-height: 1.5;
       }
       #canvas {
         padding-left: var(--body-margin-left);
@@ -272,6 +273,12 @@ const pathnames = getPathnames(Astro.url.pathname);
         [data-grid] {
           &[data-grid-col="3"] {
             grid-template-columns: 1fr;
+          }
+        }
+
+        [data-layout-center] {
+          & > * {
+            grid-column: unset;
           }
         }
       }

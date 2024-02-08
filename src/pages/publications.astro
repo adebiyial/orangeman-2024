@@ -23,28 +23,26 @@ const groupedPublications = Array.from(
     <ul data-list>
       {
         groupedPublications.map(([key, value]) => (
-          <>
-            <li data-list-item>
-              <h3 class="title" id={slugify(key)}>
-                {key}
-              </h3>
-              <ul data-list>
-                {value.map(({ title, href, publicationDate }) => {
-                  return (
-                    <li>
-                      <Hyperlink href={href} target="_blank" nounderline>
-                        {title}
-                        <time datetime={publicationDate} data-subtitle>
-                          {publicationDate}
-                        </time>
-                      </Hyperlink>
-                    </li>
-                  );
-                })}
-              </ul>
-              <PageHeader heading="" subheading={value.length} symbol="#" />
-            </li>
-          </>
+          <li data-list-item>
+            <h3 class="title" id={slugify(key)}>
+              {key}
+            </h3>
+            <ul data-list>
+              {value.map(({ title, href, publicationDate }) => {
+                return (
+                  <li>
+                    <Hyperlink href={href} target="_blank" nounderline>
+                      {title}
+                      <time datetime={publicationDate} data-subtitle>
+                        {publicationDate}
+                      </time>
+                    </Hyperlink>
+                  </li>
+                );
+              })}
+            </ul>
+            <PageHeader heading="" subheading={value.length} symbol="#" />
+          </li>
         ))
       }
     </ul>
@@ -95,8 +93,7 @@ const groupedPublications = Array.from(
       }
 
       @media screen and (max-width: 626px) {
-        time,
-        header {
+        time {
           display: none;
         }
       }
