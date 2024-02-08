@@ -35,15 +35,18 @@ const {
 <Root title={title}>
   <div data-grid data-grid-col="3" data-layout-center>
     <PageNav toc={toc} />
-    <PageHeader heading={title} subheading={date} symbol="#" />
-    <article data-grid>
-      <slot />
-    </article>
+    <main data-grid>
+      <PageHeader heading={title} subheading={date} symbol="#" />
+      <article>
+        <slot />
+      </article>
+    </main>
   </div>
 </Root>
 
 <style>
   article {
+    display: grid;
     gap: 24px 0;
     --leading: 1.9;
 

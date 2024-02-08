@@ -3,18 +3,18 @@ import type { TCard } from "./types";
 
 export const writing: TCard = [
   {
-    title: "Creative Writing",
-    subtitle: `Fiction, creative non-fiction, personal essays, cultural commentary, etc. on The <em>Septum.</em>`,
-  },
-  {
     title: "Publications",
     subtitle:
-      "All of the articles published on blogs like Smashing Magazine, CSS-Tricks, and LogRocket.",
+      "All of my articles published on blogs like Smashing Magazine, CSS-Tricks, and LogRocket.",
   },
   {
     title: "Weblog",
     subtitle:
       "Writings about how I tech: tools, frameworks, practices, opinions, tips, tricks, etc.",
+  },
+  {
+    title: "Creative Writing",
+    subtitle: `Fiction, creative non-fiction, personal essays, cultural commentary, etc. on The <em>Septum.</em>`,
   },
 ];
 

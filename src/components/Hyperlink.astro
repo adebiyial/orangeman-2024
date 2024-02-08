@@ -4,8 +4,12 @@ interface Props
     Partial<Pick<HTMLAnchorElement, "rel" | "target">> {
   nounderline?: boolean;
 }
-// const { href, rel = "noopener", target, nounderline } = Astro.props;
 const { nounderline } = Astro.props;
+const props = {
+  ...Astro.props,
+  "data-nounderline": nounderline,
+};
+delete props.nounderline;
 ---
 
 <style>
@@ -36,4 +40,4 @@ const { nounderline } = Astro.props;
     }
   }
 </style>
-<a {...Astro.props} data-nounderline={nounderline}><slot /></a>
+<a {...props}><slot /></a>

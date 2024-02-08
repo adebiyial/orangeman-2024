@@ -30,16 +30,27 @@ const occupation = "Design & Frontend Engineer.";
   [data-prose] {
     > *:not(header) {
       margin-block: 0 var(--gap-6x);
+    }
 
-      [data-list] {
-        padding: 0;
-        margin-block-start: 0;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: var(--gap-3x) var(--gap-2x);
+    [data-list] {
+      display: flex;
+      column-gap: var(--gap-2x);
+      overflow-x: auto;
+      --no-of-items: 3;
+      margin: 0;
 
-        [data-list-item] {
-          display: inherit;
+      @media screen and (max-width: 43rem) {
+        padding-bottom: var(--gap-2x);
+      }
+
+      [data-list-item] {
+        display: inherit;
+        flex: 1;
+
+        a {
+          width: calc(
+            (var(--content-width) / var(--no-of-items)) - var(--gap-2x)
+          );
         }
       }
     }

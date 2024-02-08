@@ -1,6 +1,5 @@
 ---
 import Breadcrumb from "../components/Breadcrumb.astro";
-import PageFooter from "../components/PageFooter.astro";
 import PostHog from "../components/posthog.astro";
 import { getPathnames } from "../misc/fns";
 
@@ -59,6 +58,8 @@ const pathnames = getPathnames(Astro.url.pathname);
 
         /* Spacing */
         --page-top: 8rem;
+        --content-inline-start: 12rem;
+        --content-inline-end: 12rem;
         --gap-s: 4px;
         --gap: 8px;
         --gap-2x: 16px;
@@ -90,7 +91,6 @@ const pathnames = getPathnames(Astro.url.pathname);
           --default-fg: #ffffff;
           --light-gray: #9c9c9c;
           --orange: #ff6d00;
-          /* text-transform: uppercase; */
         }
       }
       * {
@@ -123,10 +123,6 @@ const pathnames = getPathnames(Astro.url.pathname);
         padding-left: var(--body-margin-left);
         padding-right: var(--body-margin-right);
         padding-bottom: var(--safe-area-inset-bottom);
-        /* display: grid;
-        grid-template-rows: 1fr var(--footer-height);
-        align-items: start;
-        min-height: 100vh; */
       }
       b,
       strong {
@@ -190,7 +186,9 @@ const pathnames = getPathnames(Astro.url.pathname);
         }
 
         &[data-grid-col="3"] {
-          grid-template-columns: 12rem var(--content-width) 12rem;
+          grid-template-columns:
+            var(--content-inline-start) var(--content-width)
+            var(--content-inline-end);
         }
       }
 
@@ -251,6 +249,30 @@ const pathnames = getPathnames(Astro.url.pathname);
 
         > * {
           grid-column: 2;
+        }
+      }
+
+      /* Responsiveness */
+      /* For page width + body padding */
+      @media screen and (max-width: 70rem) {
+        :root {
+          --content-inline-gap: 100vw - var(--body-margin-left) -
+            var(--body-margin-right) - var(--content-width);
+          --content-inline-start: calc((var(--content-inline-gap)) / 2);
+          --content-inline-end: calc((var(--content-inline-gap)) / 2);
+        }
+      }
+
+      /* For content width + body padding */
+      @media screen and (max-width: 43rem) {
+        :root {
+          --page-top: 4rem;
+        }
+
+        [data-grid] {
+          &[data-grid-col="3"] {
+            grid-template-columns: 1fr;
+          }
         }
       }
     </style>
