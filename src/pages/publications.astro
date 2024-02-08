@@ -91,6 +91,14 @@ const groupedPublications = Array.from(
         justify-content: space-between;
         padding: var(--gap) 0;
         border-block-end: 1px solid var(--green-fade);
+        gap: var(--gap);
+      }
+
+      @media screen and (max-width: 626px) {
+        time,
+        header {
+          display: none;
+        }
       }
     }
   }

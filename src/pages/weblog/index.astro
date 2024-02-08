@@ -24,7 +24,7 @@ const groupedPosts = Array.from(
     <PageHeader heading={title} subheading={sortedPosts.length} symbol="#" />
     <ul data-list data-grid>
       {
-        groupedPosts.map(([key, value]) => (
+        groupedPosts.slice(1).map(([key, value]) => (
           <li data-list-item data-grid>
             <h3 class="title" id={slugify(key)}>
               {key}

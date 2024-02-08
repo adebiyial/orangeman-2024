@@ -15,6 +15,62 @@ const pathnames = getPathnames(Astro.url.pathname);
 const prevPath = pathnames[pathnames.length - 2];
 ---
 
+<script>
+  const TOP_OFFSET = 144;
+  const toc = document.querySelector(".toc");
+  let currentIndex = 0;
+  const essay = document.getElementById("essay");
+  const headersAnchors = essay?.querySelectorAll(":is(h2, h3)");
+
+  function updateActiveLink() {
+    const pageHeight = document.body.scrollHeight;
+    const scrollPosition = window.scrollY + window.innerHeight;
+
+    if (scrollPosition >= 0 && pageHeight - scrollPosition <= TOP_OFFSET) {
+      // Scrolled to bottom of page.
+      if (headersAnchors) {
+        currentIndex = headersAnchors?.length - 1;
+      }
+    }
+
+    let index = -1;
+    if (headersAnchors?.length) {
+      while (index < headersAnchors?.length - 1) {
+        const headerAnchor = headersAnchors[index + 1];
+        const { top } = headerAnchor.getBoundingClientRect();
+
+        if (top >= TOP_OFFSET) {
+          break;
+        }
+        index += 1;
+      }
+    }
+
+    currentIndex = Math.max(index, 0);
+
+    if (toc) {
+      const selectedIndex = Math.min(currentIndex, toc?.childElementCount - 1);
+
+      Array.from(toc.children).forEach((child, i) => {
+        child.setAttribute(
+          "data-selected",
+          i === selectedIndex ? "true" : "false"
+        );
+      });
+    }
+  }
+
+  function handleScroll() {
+    setTimeout(() => {
+      updateActiveLink();
+    }, 100);
+  }
+
+  document.addEventListener("scroll", handleScroll);
+
+  updateActiveLink();
+</script>
+
 <aside data-grid>
   {
     toc && (
@@ -71,7 +127,11 @@ const prevPath = pathnames[pathnames.length - 2];
     left: var(--body-margin-left);
     z-index: 1;
     gap: var(--gap-3x);
-    /* width: 300px; */
+    width: 300px;
+
+    @media screen and (max-width: 1340px) {
+      display: none;
+    }
 
     > span,
     > a {
@@ -100,6 +160,11 @@ const prevPath = pathnames[pathnames.length - 2];
       list-style: none;
       padding: 0;
       margin: 0;
+
+      :is([data-selected="true"]) a [data-subtitle] {
+        color: var(--orange);
+        font-weight: 600;
+      }
 
       a {
         width: 100%;
