@@ -2,6 +2,7 @@
 import PageHeader from "../components/PageHeader.astro";
 import PageNav from "../components/PageNav.astro";
 import type { BlogPostFrontmatter } from "../misc/types";
+import "../styles/pre.css";
 import Root from "./Root.astro";
 
 const posts = await Astro.glob<BlogPostFrontmatter>("../pages/weblog/*.mdx");
@@ -28,7 +29,7 @@ if (isBlogPage) {
 }
 
 const {
-  frontmatter: { title, date },
+  frontmatter: { title, date, category },
 } = Astro.props;
 ---
 
@@ -36,7 +37,8 @@ const {
   <div data-grid data-grid-col="3" data-layout-center>
     <PageNav toc={toc} />
     <main data-grid id="essay">
-      <PageHeader heading={title} subheading={date} symbol="#" />
+      <PageHeader heading={title} subheading={category} symbol="#" date={date} />
+      <hr class="spacey"/>
       <article>
         <slot />
       </article>
@@ -62,27 +64,4 @@ const {
       padding: 0;
       margin: 0;
     }
-
-    pre {
-      padding: 1rem;
-      border-radius: 4px;
-      outline: 1px solid var(--green-fade);
-      line-height: 1.8;
-      font-weight: 600 !important;
-      background: transparent !important;
-      font-size: 14px;
-      margin: 0;
-    }
-
-    code:not(pre code) {
-      font-weight: 600 !important;
-      font-size: 14px;
-      padding: 0px var(--gap-s);
-      border-radius: 4px;
-      background: var(--green-fade);
-      border: 1px solid #1e3726;
-      text-align: left;
-      box-decoration-break: clone;
-    }
-  }
 </style>

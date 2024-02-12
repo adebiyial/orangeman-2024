@@ -1,0 +1,19 @@
+pre {
+  padding: 1rem;
+  border-radius: 4px;
+  outline: 1px solid var(--green-fade);
+  line-height: 1.8;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+}
+
+code:not(pre code) {
+  font-weight: 600 !important;
+  font-size: 14px;
+  padding: 0px var(--gap-s);
+  border-radius: 4px;
+  background: var(--green-fade);
+  border: 1px solid #1e3726;
+  text-align: left;
+  box-decoration-break: clone;
+}

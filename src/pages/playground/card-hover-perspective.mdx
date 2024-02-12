@@ -1,0 +1,54 @@
+---
+layout: "../../layouts/Playground.astro"
+title: "Card Perspective Hover"
+date: "February 11, 2024"
+category: "CSS"
+---
+
+import CardPerspectiveHover from "../../components/playground/card-perspectiver-hover.astro";
+import CardPerspectiveHoverAnatomy from "../../components/playground/card-perspectiver-hover-anatomy.astro";
+
+The trick here is to distinguish each corner such that there is a `top-left`, `top-right`, `bottom-left`, and `bottom-right`.
+Then apply the desired hover effect on any of those corners&mdash;in this case a `transform` combination of `perspective` and `rotate`.
+
+<div class="demo">
+  <CardPerspectiveHoverAnatomy />
+</div>
+
+If you can move the individual corners separately, then, with a little tweak, you can move the card holistically through layering:
+
+<div class="demo">
+  <CardPerspectiveHover />
+</div>
+
+The compromise and drawback here is that you can't have your cake and eat it: since the corners need to be hovered, any foreground content will need to have its pointer events disabled.
+For example, try to highlight the text "Hover over me 😐" above. See?
+
+---
+
+```html
+<div class="wrap">
+  <div class="pseudo top-left"></div>
+  <!-- other sides like top-right &| bottom-[left|right] -->
+  <div class="card">
+    <h1>Hover over me 😐</h1>
+  </div>
+</div>
+```
+
+```css
+.card {
+  transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(var(--rotateY));
+}
+
+.top-left {
+  inset: 0 auto auto 0;
+
+  /* On hover, effect the card—instead of the corner */
+  &:hover ~ .card {
+    --perspective: 600px;
+    --rotateX: 10deg;
+    --rotateY: -10deg;
+  }
+}
+```

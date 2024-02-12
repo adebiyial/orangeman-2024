@@ -3,9 +3,10 @@ interface Props {
   heading: string;
   subheading?: string | number;
   symbol?: string;
+  date?: string;
 }
 
-const { heading, subheading, symbol } = Astro.props;
+const { heading, subheading, symbol, date } = Astro.props;
 ---
 
 <header>
@@ -14,16 +15,34 @@ const { heading, subheading, symbol } = Astro.props;
     {symbol && <span data-comment>{symbol}</span>}
     {subheading}
   </strong>
+  {
+    date && (
+      <time datetime={date} data-subtitle>
+        {date}
+      </time>
+    )
+  }
 </header>
 
 <style>
   header {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: center;
-    justify-content: space-between;
-    margin-block-end: var(--gap-3x);
     line-height: 1;
-    flex-wrap: wrap;
     gap: var(--gap);
+    margin-block-end: var(--gap-3x);
+
+    h2 {
+      font-size: 18px;
+    }
+
+    *:nth-child(2) {
+      margin-left: auto;
+    }
+
+    time {
+      font-weight: 600;
+    }
   }
 </style>

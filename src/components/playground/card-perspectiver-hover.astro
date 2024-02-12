@@ -1,0 +1,93 @@
+<div class="wrap">
+  <div class="corner top-left"></div>
+  <div class="corner top-right"></div>
+  <div class="corner bottom-left"></div>
+  <div class="corner bottom-right"></div>
+  <div class="card">
+    <h1>Hover over me 😐</h1>
+  </div>
+</div>
+
+<style>
+  .wrap {
+    --bg: #1e3726;
+    --transform: perspective(600px);
+    --perspective: 600px;
+    --rotateX: 0;
+    --rotateY: 0;
+
+    height: 400px;
+    width: var(--content-width);
+    position: relative;
+  }
+
+  .corner {
+    --size: 50%;
+    width: var(--size);
+    height: var(--size);
+    /* transition: 0.3s; */
+    position: absolute;
+    /* opacity: 0; */
+    z-index: 2;
+  }
+
+  .top-left {
+    inset: 0 auto auto 0;
+
+    &:hover ~ .card {
+      --rotateY: -10deg;
+    }
+  }
+
+  .top-right {
+    inset: 0 0 auto auto;
+
+    &:hover ~ .card {
+      --rotateY: 10deg;
+    }
+  }
+
+  .top-left,
+  .top-right {
+    &:hover ~ .card {
+      --rotateX: 10deg;
+    }
+  }
+
+  .bottom-left {
+    inset: auto auto 0 0;
+
+    &:hover ~ .card {
+      --rotateY: -10deg;
+    }
+  }
+
+  .bottom-right {
+    inset: auto 0 0 auto;
+
+    &:hover ~ .card {
+      --rotateY: 10deg;
+    }
+  }
+
+  .bottom-left,
+  .bottom-right {
+    &:hover ~ .card {
+      --rotateX: -10deg;
+    }
+  }
+
+  .card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition-xx) ease-in;
+    transform: perspective(var(--perspective)) rotateX(var(--rotateX))
+      rotateY(var(--rotateY));
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background-color: var(--bg);
+  }
+</style>

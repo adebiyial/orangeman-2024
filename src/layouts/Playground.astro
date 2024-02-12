@@ -1,0 +1,64 @@
+---
+import PageHeader from "../components/PageHeader.astro";
+import Root from "./Root.astro";
+import "../styles/pre.css";
+
+const {
+  frontmatter: { title, date, category },
+} = Astro.props;
+---
+
+<Root title={title}>
+  <div data-grid data-grid-col="3" data-layout-center>
+    <PageHeader heading={title} subheading={category} symbol="#" date={date} />
+    <hr class="spacey" />
+    <article>
+      <slot />
+    </article>
+  </div>
+</Root>
+
+<style>
+  [data-layout-center] {
+    header {
+      margin-block-end: 0;
+
+      h2 {
+        width: fit-content;
+        margin-block-start: var(--gap-2x);
+      }
+    }
+  }
+
+  article {
+    display: contents;
+    --leading: 1.9;
+
+    > * {
+      grid-column: 2;
+      margin-block: 24px 0;
+
+      &:first-child {
+        margin: 0;
+      }
+    }
+
+    ul {
+      display: grid;
+      gap: var(--gap);
+      line-height: var(--leading);
+      padding: 0;
+      margin: 0;
+    }
+
+    .demo {
+      grid-column: 1/-1;
+      display: grid;
+      justify-content: center;
+      outline: 1px solid var(--green-fade);
+      padding: 3rem;
+      border-radius: 2px;
+      background-color: rgb(11, 17, 11);
+    }
+  }
+</style>

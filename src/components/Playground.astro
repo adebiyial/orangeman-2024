@@ -18,7 +18,7 @@ const imageHeight = 25;
     {
       playground.map(({ title, subtitle }) => (
         <li data-list-item>
-          <Hyperlink href={slugify(title)} nounderline>
+          <Hyperlink href={`/playground/${slugify(title)}`} nounderline>
             <Card
               {...{
                 title,
@@ -35,9 +35,3 @@ const imageHeight = 25;
     }
   </ul>
 </section>
-
-<style>
-  [data-list] {
-    --no-of-items: 2 !important;
-  }
-</style>

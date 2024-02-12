@@ -56,8 +56,12 @@ export const projects: TCard = [
 
 export const playground: TCard = [
   {
-    title: "Nightingale",
-    subtitle: "VSCode theme for night owls.",
+    title: "Card Hover Perspective",
+    subtitle: "Hovering the corners makes them active.",
+  },
+  {
+    title: "Card Skeleton Loader",
+    subtitle: "It's in the name, no?",
   },
   {
     title: "The Septum",
