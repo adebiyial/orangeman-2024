@@ -2,6 +2,8 @@
 import Breadcrumb from "../components/Breadcrumb.astro";
 import PostHog from "../components/posthog.astro";
 import { getPathnames } from "../misc/fns";
+import "@fontsource-variable/bricolage-grotesque/wdth.css";
+import "@fontsource/ibm-plex-mono/600.css";
 
 interface Props {
   title: string;
@@ -38,8 +40,8 @@ const pathnames = getPathnames(Astro.url.pathname);
           "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
           "Helvetica Neue", sans-serif;
 
-        --font-display: "Bricolage Grotesque 24pt", var(--font-fallback);
-        --font-body: "Bricolage Grotesque 24pt", var(--font-fallback);
+        --font-display: "Bricolage Grotesque Variable", var(--font-fallback);
+        --font-body: "Bricolage Grotesque Variable", var(--font-fallback);
         --font-sans: var(--font-body);
         /* font-serif */
         --font-mono: "IBM Plex Mono", Menlo, Monaco, Lucida Console,
@@ -112,6 +114,7 @@ const pathnames = getPathnames(Astro.url.pathname);
         touch-action: manipulation;
       }
       body {
+        font-variation-settings: "wdth" 98;
         font-family: var(--font-sans);
         background: var(--bg);
         color: var(--fg);
