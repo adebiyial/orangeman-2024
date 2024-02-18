@@ -79,18 +79,18 @@ const pathnames = getPathnames(Astro.url.pathname);
         --transition-xx: 240ms;
         --transition-fast: 100ms;
       }
-      @media (prefers-color-scheme: dark) {
-        :root {
-          color-scheme: dark;
-          --bg: #101010;
-          --bg: #0b0f0b;
-          --fg: #d7d7db;
-          --green-fade: rgba(30, 55, 38, 0.6);
-          --default-fg: #ffffff;
-          --light-gray: #9c9c9c;
-          --orange: #ff6d00;
-        }
+      /* @media (prefers-color-scheme: dark) { */
+      :root {
+        color-scheme: dark;
+        --bg: #101010;
+        --bg: #0b0f0b;
+        --fg: #d7d7db;
+        --green-fade: rgba(30, 55, 38, 0.6);
+        --default-fg: #ffffff;
+        --light-gray: #9c9c9c;
+        --orange: #ff6d00;
       }
+      /* } */
       * {
         scrollbar-width: thin;
         scrollbar-color: #1e3726 transparent;

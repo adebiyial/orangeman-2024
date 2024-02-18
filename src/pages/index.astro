@@ -91,5 +91,17 @@ const occupation = "Design & Frontend Engineer.";
         }
       }
     }
+
+    @media screen and (max-width: 444px) {
+      > header {
+        > *:first-child {
+          grid-template-columns: 1fr;
+
+          *:nth-child(2) {
+            margin-left: unset;
+          }
+        }
+      }
+    }
   }
 </style>
