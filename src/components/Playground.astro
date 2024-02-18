@@ -6,6 +6,7 @@ import Hyperlink from "./Hyperlink.astro";
 import SectionHeader from "./SectionHeader.astro";
 
 const imageHeight = 25;
+const noOfItems = playground.length;
 ---
 
 <section data-grid>
@@ -13,7 +14,6 @@ const imageHeight = 25;
     heading="Playground"
     subheading="Where I fail repeatedly, but where things eventually get made."
   />
-
   <ul data-list>
     {
       playground.map(({ title, subtitle }) => (
@@ -35,3 +35,9 @@ const imageHeight = 25;
     }
   </ul>
 </section>
+
+<style define:vars={{ noOfItems }}>
+  [data-list] {
+    --no-of-items: var(--noOfItems) !important;
+  }
+</style>

@@ -53,7 +53,12 @@ const sortedBooks = sort(
 <Root title={title}>
   <div data-layout-center>
     <article data-prose>
-      <PageHeader heading={title} subheading="" symbol="#" />
+      <PageHeader
+        heading={title}
+        subheading="Books, articles, and creative writing."
+        symbol="#"
+        spacey={false}
+      />
       <ul data-list>
         {
           pages.map(({ title, subtitle }) => (
@@ -158,6 +163,7 @@ const sortedBooks = sort(
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: var(--gap-4x);
+      margin-block-start: var(--gap-6x);
 
       [data-list-item] {
         display: inherit;

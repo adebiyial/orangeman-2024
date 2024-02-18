@@ -19,7 +19,12 @@ const groupedPublications = Array.from(
 
 <Root title={title}>
   <div data-grid data-grid-col="3" data-layout-center>
-    <PageHeader heading={title} subheading={publications.length} symbol="#" />
+    <PageHeader
+      heading={title}
+      subheading={publications.length}
+      symbol="#"
+      spacey={false}
+    />
     <ul data-list>
       {
         groupedPublications.map(([key, value]) => (
@@ -41,7 +46,12 @@ const groupedPublications = Array.from(
                 );
               })}
             </ul>
-            <PageHeader heading="" subheading={value.length} symbol="#" />
+            <PageHeader
+              heading=""
+              subheading={value.length}
+              symbol="#"
+              spacey={false}
+            />
           </li>
         ))
       }
@@ -59,22 +69,24 @@ const groupedPublications = Array.from(
       margin-block-end: var(--gap-3x);
 
       header {
-        padding-block: 0 var(--gap);
-        margin: 0 0 0 auto;
-        border-bottom: 1px solid var(--green-fade);
-        width: fit-content;
-        border-top: transparent;
-        position: relative;
-        top: -2px;
-        background-color: var(--bg);
+        > *:first-child {
+          padding-block: 0 var(--gap);
+          margin: 0 0 0 auto;
+          border-bottom: 1px solid var(--green-fade);
+          width: fit-content;
+          border-top: transparent;
+          position: relative;
+          top: -2px;
+          background-color: var(--bg);
 
-        &::after {
-          content: "";
-          position: absolute;
-          height: 100%;
-          width: var(--gap);
-          left: calc(-1 * var(--gap));
-          background: inherit;
+          &::after {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: var(--gap);
+            left: calc(-1 * var(--gap));
+            background: inherit;
+          }
         }
       }
 
@@ -82,6 +94,7 @@ const groupedPublications = Array.from(
         margin-block-end: var(--gap-2x);
         width: fit-content;
         scroll-margin-top: var(--page-top);
+        font-size: 1rem;
       }
 
       li a {

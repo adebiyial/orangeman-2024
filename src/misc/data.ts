@@ -63,8 +63,4 @@ export const playground: TCard = [
     title: "Card Skeleton Loader",
     subtitle: "It's in the name, no?",
   },
-  {
-    title: "The Septum",
-    subtitle: "Website for a media and publication company.",
-  },
 ];

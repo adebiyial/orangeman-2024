@@ -26,8 +26,12 @@ const groupedArticles = Array.from(
 
 <Root title={title}>
   <div data-layout-center>
-    <PageHeader heading={title} subheading={sortedArticles.length} symbol="#" />
-
+    <PageHeader
+      heading={title}
+      subheading={sortedArticles.length}
+      symbol="#"
+      spacey={false}
+    />
     <ul data-grid data-list>
       {
         groupedArticles.map(([key, value]) => (
@@ -95,6 +99,7 @@ const groupedArticles = Array.from(
         margin-block-end: var(--gap-2x);
         width: fit-content;
         scroll-margin-top: var(--page-top);
+        font-size: 1rem;
       }
 
       [data-list] {

@@ -4,45 +4,51 @@ interface Props {
   subheading?: string | number;
   symbol?: string;
   date?: string;
+  spacey?: boolean;
 }
 
-const { heading, subheading, symbol, date } = Astro.props;
+const { heading, subheading, symbol, date, spacey = true } = Astro.props;
 ---
 
 <header>
-  <h2>{heading}</h2>
-  <strong>
-    {symbol && <span data-comment>{symbol}</span>}
-    {subheading}
-  </strong>
-  {
-    date && (
-      <time datetime={date} data-subtitle>
-        {date}
-      </time>
-    )
-  }
+  <div>
+    <h2>{heading}</h2>
+    <strong>
+      {symbol && <span data-comment>{symbol}</span>}
+      {subheading}
+    </strong>
+    {
+      date && (
+        <time datetime={date} data-subtitle>
+          {date}
+        </time>
+      )
+    }
+  </div>
+  {spacey && <hr class="spacey" />}
 </header>
 
 <style>
   header {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    line-height: 1;
-    gap: var(--gap);
-    margin-block-end: var(--gap-3x);
+    > *:first-child {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      line-height: 1;
+      gap: var(--gap);
+      margin-block-end: var(--gap-3x);
 
-    h2 {
-      font-size: 18px;
-    }
+      h2 {
+        font-size: 1.125rem;
+      }
 
-    *:nth-child(2) {
-      margin-left: auto;
-    }
+      *:nth-child(2) {
+        margin-left: auto;
+      }
 
-    time {
-      font-weight: 600;
+      time {
+        font-weight: 600;
+      }
     }
   }
 </style>
