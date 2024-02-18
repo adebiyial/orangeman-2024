@@ -4,6 +4,14 @@
   .card {
     width: var(--content-width);
     height: 400px;
+    @media screen and (max-width: 43rem) {
+      width: calc(
+        100vw - var(--body-margin-left) - var(--body-margin-right) * 2
+      );
+      height: calc(
+        100vw - var(--body-margin-left) - var(--body-margin-right) * 2
+      );
+    }
     background: linear-gradient(
       90deg,
       hsl(139, 33%, 28%) 25%,

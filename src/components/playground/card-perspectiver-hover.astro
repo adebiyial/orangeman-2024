@@ -19,15 +19,22 @@
     height: 400px;
     width: var(--content-width);
     position: relative;
+
+    @media screen and (max-width: 43rem) {
+      width: calc(
+        100vw - var(--body-margin-left) - var(--body-margin-right) * 2
+      );
+      height: calc(
+        100vw - var(--body-margin-left) - var(--body-margin-right) * 2
+      );
+    }
   }
 
   .corner {
     --size: 50%;
     width: var(--size);
     height: var(--size);
-    /* transition: 0.3s; */
     position: absolute;
-    /* opacity: 0; */
     z-index: 2;
   }
 
@@ -89,5 +96,7 @@
     z-index: 2;
     pointer-events: none;
     background-color: var(--bg);
+    padding: 0.5rem;
+    text-align: center;
   }
 </style>

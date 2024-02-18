@@ -24,7 +24,7 @@ const {
 
       h2 {
         width: fit-content;
-        margin-block-start: var(--gap-2x);
+        /* margin-block-start: var(--gap-2x); */
       }
     }
   }
@@ -55,9 +55,20 @@ const {
       display: grid;
       justify-content: center;
       outline: 1px solid var(--green-fade);
-      padding: 3rem;
+      padding: 1rem 3rem;
       border-radius: 2px;
       background-color: rgb(11, 17, 11);
+      overflow: scroll;
+    }
+
+    @media screen and (max-width: 43rem) {
+      > * {
+        grid-column: unset;
+      }
+
+      .demo {
+        grid-column: 1;
+      }
     }
   }
 </style>

@@ -40,6 +40,11 @@ const pathnames = getPathnames(Astro.url.pathname);
     overflow: hidden;
     left: 50%;
     transform: translateX(-50%);
+    justify-content: center;
+
+    @media screen and (max-width: 43rem) {
+      width: calc(100vw - var(--body-margin-left) - var(--body-margin-right));
+    }
 
     [data-subtitle],
     a {
@@ -49,6 +54,12 @@ const pathnames = getPathnames(Astro.url.pathname);
     [data-list-item] {
       position: relative;
       height: 100%;
+      transition: var(--transition-xx);
+      flex-shrink: 0;
+
+      &:hover {
+        background-color: var(--green-fade);
+      }
 
       &:not(:first-child)::before {
         content: "";

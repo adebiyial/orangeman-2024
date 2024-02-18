@@ -11,14 +11,16 @@ import CardSkeletonLoader from "../../components/playground/card-skeleton-loader
   <CardSkeletonLoader />
 </div>
 
+---
+
+#### Code snippet
+
 ```html
 <div class="card"></div>
 ```
 
 ```css
 .card {
-  width: var(--content-width);
-  height: 400px;
   background: linear-gradient(
     90deg,
     hsl(139, 33%, 28%) 25%,
@@ -27,7 +29,6 @@ import CardSkeletonLoader from "../../components/playground/card-skeleton-loader
   );
   background-size: 400% 100%;
   animation: skeleton 1.2s infinite;
-  border-radius: 4px;
 }
 
 @keyframes skeleton {
